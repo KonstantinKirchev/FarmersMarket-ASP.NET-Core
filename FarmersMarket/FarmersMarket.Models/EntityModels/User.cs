@@ -1,6 +1,6 @@
 ﻿namespace FarmersMarket.Models.EntityModels
 {
-    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNetCore.Identity;
 
     public class User : IdentityUser
     {

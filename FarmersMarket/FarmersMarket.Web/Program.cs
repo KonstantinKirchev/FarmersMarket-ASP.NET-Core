@@ -1,5 +1,7 @@
 using FarmersMarket.Data;
+using FarmersMarket.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +18,16 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => {
     .AddEntityFrameworkStores<FarmersMarketDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddMvc(options =>
+    {
+        options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+    });
+
+
+
 var app = builder.Build();
+
+//app.UseDatabaseMigration();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

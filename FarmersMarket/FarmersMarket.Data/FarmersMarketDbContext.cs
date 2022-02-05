@@ -23,15 +23,13 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<ShoppingCart>().HasKey(q => q.Id);
-            builder.Entity<Product>().HasKey(q => q.Id);
             builder.Entity<ShoppingCartProduct>().HasKey(q =>
-                new {
+                new
+                {
                     q.ShoppingCartId,
                     q.ProductId
                 });
 
-            // Relationships
             builder.Entity<ShoppingCartProduct>()
                 .HasOne(t => t.ShoppingCart)
                 .WithMany(t => t.ShoppingCartProducts)

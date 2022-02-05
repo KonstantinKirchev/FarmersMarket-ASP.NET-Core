@@ -23,4 +23,8 @@
     <ProjectReference Include="..\FarmersMarket.Tests\FarmersMarket.Tests.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infrastructure\Extensions\" />
+  </ItemGroup>
+
 </Project>
