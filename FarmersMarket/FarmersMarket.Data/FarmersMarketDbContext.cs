@@ -1,4 +1,4 @@
-﻿namespace FarmersMarket.Web.Data
+﻿namespace FarmersMarket.Data
 {
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;

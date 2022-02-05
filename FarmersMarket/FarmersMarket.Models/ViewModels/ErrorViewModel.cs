@@ -1,4 +1,4 @@
-namespace FarmersMarket.Web.Models
+namespace FarmersMarket.Models
 {
     public class ErrorViewModel
     {
