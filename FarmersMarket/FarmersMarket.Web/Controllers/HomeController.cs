@@ -1,16 +1,13 @@
-﻿using FarmersMarket.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-
-namespace FarmersMarket.Web.Controllers
+﻿namespace FarmersMarket.Web.Controllers
 {
+    using FarmersMarket.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Diagnostics;
+
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
-            _logger = logger;
         }
 
         public IActionResult Index()
