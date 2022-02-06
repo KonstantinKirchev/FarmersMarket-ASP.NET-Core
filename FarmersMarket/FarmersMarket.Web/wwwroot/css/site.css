@@ -13,10 +13,6 @@ html {
     min-height: 100%;
 }
 
-body {
-    margin-bottom: 60px;
-}
-
 .footer-distributed {
     background-color: #2c3e50;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
@@ -25,8 +21,6 @@ body {
     text-align: left;
     font: bold 16px sans-serif;
     padding: 20px;
-    position: fixed;
-    bottom: 0;
 }
 
     .footer-distributed .footer-left,
@@ -278,6 +272,15 @@ body > div.container.body-content > table > tbody > tr > td {
     margin-bottom: 15px;
 }
 
-    .error-actions .btn {
-        margin-right: 10px;
-    }
+.error-actions .btn {
+    margin-right: 10px;
+}
+
+.carousel-inner {
+    width: 100vw;
+}
+
+.navbar {
+    padding-left: 20px;
+    padding-right: 20px;
+}
