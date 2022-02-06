@@ -1,4 +1,5 @@
 using FarmersMarket.Data;
+using FarmersMarket.Models.EntityModels;
 using FarmersMarket.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => {
         options.SignIn.RequireConfirmedAccount = false;
     })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<FarmersMarketDbContext>();
 builder.Services.AddControllersWithViews();
 
@@ -22,8 +24,6 @@ builder.Services.AddMvc(options =>
     {
         options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
     });
-
-
 
 var app = builder.Build();
 
