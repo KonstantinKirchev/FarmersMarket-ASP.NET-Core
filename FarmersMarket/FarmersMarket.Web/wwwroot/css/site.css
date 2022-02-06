@@ -284,3 +284,11 @@ body > div.container.body-content > table > tbody > tr > td {
     padding-left: 20px;
     padding-right: 20px;
 }
+
+.container {
+    min-height: 70vh;
+}
+
+.form-floating {
+    margin-bottom: 10px;
+}

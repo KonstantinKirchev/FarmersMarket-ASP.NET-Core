@@ -14,28 +14,28 @@
                 serviceScope.ServiceProvider.GetService<FarmersMarketDbContext>().Database.Migrate();
 
                 //var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
-                var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+                //var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
 
-                Task.Run(async() =>
-                {
-                    var roles = new[] { WebConstants.AdminRole, WebConstants.ManagerRole };
+                //Task.Run(async() =>
+                //{
+                //    var roles = new[] { WebConstants.AdminRole, WebConstants.ManagerRole };
 
-                    foreach (var role in roles)
-                    {
-                        var roleExists = await roleManager.RoleExistsAsync(role);
+                //    foreach (var role in roles)
+                //    {
+                //        var roleExists = await roleManager.RoleExistsAsync(role);
 
-                        if (!roleExists)
-                        {
-                            await roleManager.CreateAsync(new IdentityRole
-                            {
-                                Name = role
-                            });
-                        }
-                    }
+                //        if (!roleExists)
+                //        {
+                //            await roleManager.CreateAsync(new IdentityRole
+                //            {
+                //                Name = role
+                //            });
+                //        }
+                    //}
 
                     //var adminEmail = "admin@gmail.com";
 
-                    //var adminExists = await userManager.FindByNameAsync(adminEmail);
+                    //var adminExists = await userManager.FindByEmailAsync(adminEmail);
 
                     //if (adminExists == null)
                     //{
@@ -64,8 +64,8 @@
                     //    await userManager.CreateAsync(user, "manager1234");
                     //    await userManager.AddToRoleAsync(user, WebConstants.ManagerRole);
                     //}
-                })
-                .Wait();
+                //})
+                //.Wait();
             }
 
             return app;
