@@ -1,0 +1,50 @@
+﻿<footer class="footer-distributed">
+        <div class="footer-left">
+            <h3>Farmers<span> Market</span></h3>
+            <p class="footer-links">
+                @Html.ActionLink("Home", "Index", "Home")
+                ·
+                @Html.ActionLink("Farms", "All", "Farms")
+                ·
+                @Html.ActionLink("Products", "All", "Products")
+                ·
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Admin", "Index", "HomeAdmin", routeValues: new { area = "Admin" }, htmlAttributes: null)
+                }
+                else
+                {
+                    @Html.ActionLink("Shopping cart", "Index", "ShoppingCart")
+                }
+                ·
+                @Html.ActionLink("Privacy", "Privacy", "Home")
+            </p>
+            <p class="footer-company-name">Farmers Market &copy; @DateTime.UtcNow.Year</p>
+        </div>
+        <div class="footer-center">
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p><span>21 Solunska str.</span> Sofia, Bulgaria</p>
+            </div>
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>+359 877 690 171</p>
+            </div>
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p><a href="mailto:konstantin1230@yahoo.com">konstantin1230@yahoo.com</a></p>
+            </div>
+        </div>
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>About the company</span>
+                One of the biggest markets in the country.
+            </p>
+            <div class="footer-icons">
+                <a href="https://www.facebook.com/konstantin.kirchev" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/konstantin1230" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/konstantinkirchev" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/KonstantinKirchev/" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+</footer>
