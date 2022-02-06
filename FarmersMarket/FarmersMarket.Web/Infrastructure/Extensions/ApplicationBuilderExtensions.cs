@@ -13,7 +13,7 @@
             {
                 serviceScope.ServiceProvider.GetService<FarmersMarketDbContext>().Database.Migrate();
 
-                var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
+                //var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
                 var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
 
                 Task.Run(async() =>
@@ -33,37 +33,37 @@
                         }
                     }
 
-                    var adminEmail = "admin@gmail.com";
+                    //var adminEmail = "admin@gmail.com";
 
-                    var adminExists = await userManager.FindByNameAsync(adminEmail);
+                    //var adminExists = await userManager.FindByNameAsync(adminEmail);
 
-                    if (adminExists == null)
-                    {
-                        var user = new User
-                        {
-                            Email = adminEmail,
-                            UserName = WebConstants.AdminRole
-                        };
+                    //if (adminExists == null)
+                    //{
+                    //    var user = new User
+                    //    {
+                    //        Email = adminEmail,
+                    //        UserName = WebConstants.AdminRole
+                    //    };
 
-                        await userManager.CreateAsync(user, "admin1234");
-                        await userManager.AddToRoleAsync(user, WebConstants.AdminRole);
-                    }
+                    //    await userManager.CreateAsync(user, "admin1234");
+                    //    await userManager.AddToRoleAsync(user, WebConstants.AdminRole);
+                    //}
 
-                    var managerEmail = "manager@gmail.com";
+                    //var managerEmail = "manager@gmail.com";
 
-                    var managerExists = await userManager.FindByNameAsync(managerEmail);
+                    //var managerExists = await userManager.FindByNameAsync(managerEmail);
 
-                    if (managerExists == null)
-                    {
-                        var user = new User
-                        {
-                            Email = managerEmail,
-                            UserName = WebConstants.ManagerRole
-                        };
+                    //if (managerExists == null)
+                    //{
+                    //    var user = new User
+                    //    {
+                    //        Email = managerEmail,
+                    //        UserName = WebConstants.ManagerRole
+                    //    };
 
-                        await userManager.CreateAsync(user, "manager1234");
-                        await userManager.AddToRoleAsync(user, WebConstants.ManagerRole);
-                    }
+                    //    await userManager.CreateAsync(user, "manager1234");
+                    //    await userManager.AddToRoleAsync(user, WebConstants.ManagerRole);
+                    //}
                 })
                 .Wait();
             }
