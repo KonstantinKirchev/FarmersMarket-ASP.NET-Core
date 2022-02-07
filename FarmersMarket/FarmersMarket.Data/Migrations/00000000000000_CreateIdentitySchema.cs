@@ -1,4 +1,4 @@
-﻿namespace FarmersMarket.Web.Data.Migrations
+﻿namespace FarmersMarket.Data.Migrations
 {
     using Microsoft.EntityFrameworkCore.Metadata;
     using Microsoft.EntityFrameworkCore.Migrations;

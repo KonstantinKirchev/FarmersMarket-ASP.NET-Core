@@ -13,17 +13,17 @@ builder.Services.AddDbContext<FarmersMarketDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<User>(options => {
+builder.Services.AddIdentity<User, IdentityRole>(options => {
         options.SignIn.RequireConfirmedAccount = false;
     })
-    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<FarmersMarketDbContext>();
-builder.Services.AddControllersWithViews();
 
 builder.Services.AddMvc(options =>
-    {
-        options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
-    });
+{
+    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+});
+
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 

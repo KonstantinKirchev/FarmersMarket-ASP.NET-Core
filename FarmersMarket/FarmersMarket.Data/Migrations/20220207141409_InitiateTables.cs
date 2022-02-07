@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace FarmersMarket.Web.Data.Migrations
+namespace FarmersMarket.Data.Migrations
 {
-    public partial class initialMigration2 : Migration
+    public partial class InitiateTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -1,7 +1,6 @@
 ﻿namespace FarmersMarket.Data
 {
     using FarmersMarket.Models.EntityModels;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
@@ -12,15 +11,15 @@
         {
         }
 
-        public virtual DbSet<Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
 
-        public virtual DbSet<Category> Categories { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
-        public virtual DbSet<Farm> Farms { get; set; }
+        public DbSet<Farm> Farms { get; set; }
 
-        public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
-        public virtual DbSet<ShoppingCartProduct> ShoppingCartProducts { get; set; }
+        public DbSet<ShoppingCartProduct> ShoppingCartProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
