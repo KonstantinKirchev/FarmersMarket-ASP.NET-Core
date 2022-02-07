@@ -1,3 +1,4 @@
+using AutoMapper;
 using FarmersMarket.Data;
 using FarmersMarket.Models.EntityModels;
 using FarmersMarket.Web.Infrastructure.Extensions;
@@ -17,6 +18,8 @@ builder.Services.AddIdentity<User, IdentityRole>(options => options.SignIn.Requi
     .AddEntityFrameworkStores<FarmersMarketDbContext>()
     .AddDefaultTokenProviders()
     .AddDefaultUI();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddMvc(options =>
 {
