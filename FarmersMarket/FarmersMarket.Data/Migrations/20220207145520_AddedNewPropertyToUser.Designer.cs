@@ -4,6 +4,7 @@ using FarmersMarket.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FarmersMarket.Data.Migrations
 {
     [DbContext(typeof(FarmersMarketDbContext))]
-    partial class FarmersMarketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220207145520_AddedNewPropertyToUser")]
+    partial class AddedNewPropertyToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,7 +209,7 @@ namespace FarmersMarket.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("HowDoYouKnowAboutUs")
+                    b.Property<int?>("HowdoYouKnowAboutUs")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
