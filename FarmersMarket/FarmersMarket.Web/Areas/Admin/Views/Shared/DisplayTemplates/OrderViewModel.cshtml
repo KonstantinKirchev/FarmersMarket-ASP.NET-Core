@@ -1,0 +1,20 @@
+﻿@using FarmersMarket.Models.Enums
+@using FarmersMarket.Models.ViewModels
+@model OrderViewModel
+    
+<tr>
+    <td>@Model.Id</td>
+    <td>@Model.DateOfOrder</td>
+    <td>@Model.DateOfDelivery</td>
+    <td>@Html.ActionLink("client", "Client", "Orders", new { id = Model.Id }, null)</td>
+    <td>@Html.ActionLink("products", "Products", "Orders", new { id = Model.Id }, null)</td>
+    <td>@Model.TotalPrice lv.</td>
+    <td>@Model.Status</td>
+    @if (Model.Status == OrderStatus.Pending)
+            {
+        <td>@Html.ActionLink("Deliver", "DeliverOrder", "Orders", routeValues: new { area = "Admin", id = Model.Id }, htmlAttributes: new { @class = "btn btn-danger" })</td>
+    }
+</tr>
+
+
+

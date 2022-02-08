@@ -1,0 +1,24 @@
+﻿@using FarmersMarket.Models.ViewModels
+@model UserViewModel
+@{
+    ViewData["Title"] = "Client info";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr>
+<strong>@Html.DisplayNameFor(m => m.Name):</strong>
+@Html.DisplayFor(m => m.Name)
+<br>
+<strong>@Html.DisplayNameFor(m => m.Address):</strong>
+@Html.DisplayFor(m => m.Address)
+<br>
+<strong>@Html.DisplayNameFor(m => m.Email):</strong>
+@Html.DisplayFor(m => m.Email)
+<br>
+<strong>@Html.DisplayNameFor(m => m.PhoneNumber):</strong>
+@Html.DisplayFor(m => m.PhoneNumber)
+<br>
+<br>
+@Html.ActionLink("Back to orders", "Index", "Orders", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "btn btn-danger" })
+<br>
+

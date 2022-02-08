@@ -1,0 +1,72 @@
+﻿@using FarmersMarket.Models.ViewModels
+@model FarmViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+
+    <h3>Are you sure you want to delete this farm?</h3>
+    <div>
+        <hr />
+        <img src="@Model.ImageUrl" alt="Farm image" width="400" height="300"/>
+        <br>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                @Html.ActionLink("Delete", "Delete", "Farms", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "btn btn-success" })
+                @Html.ActionLink("Cancel", "All", "Farms", routeValues: new { area = "" }, htmlAttributes: new { @class = "btn btn-danger" })
+            </div>
+        }
+  
+    </div>
+</div>
+
+

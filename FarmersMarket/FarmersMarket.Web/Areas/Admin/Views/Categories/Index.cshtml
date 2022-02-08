@@ -1,0 +1,24 @@
+﻿@using FarmersMarket.Models.ViewModels
+@model IEnumerable<CategoryViewModel>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @Html.DisplayFor(category => category)
+
+</table>
+
+<p>
+    @Html.ActionLink("Create New", "Create", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "btn btn-success" })
+</p>

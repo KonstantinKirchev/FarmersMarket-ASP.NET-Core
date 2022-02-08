@@ -1,0 +1,59 @@
+﻿@using FarmersMarket.Models.ViewModels
+@model X.PagedList.IPagedList<OrderViewModel>
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<section id="viewAllOrders">
+    @if (Model == null)
+    {
+        <div class="container">
+            <h1>There are no orders.</h1>
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <h1>@ViewData["Title"]</h1>
+            <br>
+            <div class="form-group">
+                <label for="status" class="col-lg-1 control-label">Sort by:</label>
+                <div class="col-lg-2">
+                    <select class="form-control selectpicker" id="status">
+                        <option>All</option>
+                        <option>Open</option>
+                        <option>Pending</option>
+                        <option>Delivered</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="orders" id="orders">
+                @{
+                    Html.RenderPartial("_OrdersByStatusPartial", Model);
+                }
+            </div>
+        </div>
+    }
+</section>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#status").change(function () {
+                var statusSelected = $("select option:selected").first().text();
+                $.get('@Url.Action("_OrdersByStatusPartial")',
+                    { status: statusSelected }, function (data) {
+                        $("#orders").html(data);
+                    });
+            });
+        });
+    </script>
+}
+
+
+
+
+
