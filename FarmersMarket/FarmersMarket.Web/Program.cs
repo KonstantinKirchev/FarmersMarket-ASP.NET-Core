@@ -1,6 +1,7 @@
-using AutoMapper;
 using FarmersMarket.Data;
 using FarmersMarket.Models.EntityModels;
+using FarmersMarket.Services.Implementations;
+using FarmersMarket.Services.Interfaces;
 using FarmersMarket.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,11 @@ builder.Services.AddMvc(options =>
 });
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<IFarmsService, FarmsService>();
+builder.Services.AddTransient<ICategoriesService, CategoriesService>();
+builder.Services.AddTransient<IProductsService, ProductsService>();
+builder.Services.AddTransient<IOrdersService, OrdersService>();
 
 var app = builder.Build();
 
