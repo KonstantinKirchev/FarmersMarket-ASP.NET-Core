@@ -292,3 +292,6 @@ body > div.container.body-content > table > tbody > tr > td {
 .form-floating {
     margin-bottom: 10px;
 }
+.privacy-policy ol{
+    margin-top: 20px;
+}
