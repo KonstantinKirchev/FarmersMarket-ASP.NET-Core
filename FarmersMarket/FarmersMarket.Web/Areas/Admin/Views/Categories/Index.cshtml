@@ -19,6 +19,8 @@
 
 </table>
 
-<p>
-    @Html.ActionLink("Create New", "Create", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "btn btn-success" })
+ <p>
+    <a  asp-area="Admin" asp-controller="Categories" asp-action="Create" class="btn btn-success">Add</a>
 </p>
+
+

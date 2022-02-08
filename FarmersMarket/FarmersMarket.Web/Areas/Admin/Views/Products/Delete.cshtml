@@ -1,7 +1,7 @@
 ﻿@using FarmersMarket.Models.ViewModels
 @model ProductViewModel
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete product";
 }
 
 <div class="container">
@@ -52,7 +52,7 @@
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
-                @Html.ActionLink("Delete", "Delete", "Products", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "btn btn-success" })
+                <input type="submit" value="Delete" class="btn btn-success"/>
                 @Html.ActionLink("Cancel", "All", "Products", routeValues: new { area = "" }, htmlAttributes: new { @class = "btn btn-danger" })
             </div>
         }

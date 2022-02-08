@@ -2,7 +2,7 @@
 @model FarmViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete farm";
 }
 
 <div class="container">
@@ -61,7 +61,7 @@
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
-                @Html.ActionLink("Delete", "Delete", "Farms", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "btn btn-success" })
+                <input type="submit" value="Delete" class="btn btn-success"/>
                 @Html.ActionLink("Cancel", "All", "Farms", routeValues: new { area = "" }, htmlAttributes: new { @class = "btn btn-danger" })
             </div>
         }

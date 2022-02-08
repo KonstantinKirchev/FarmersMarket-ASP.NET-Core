@@ -1,7 +1,7 @@
 ﻿@using FarmersMarket.Models.ViewModels
 @model FarmViewModel
 @{
-    ViewData["Title"] = "Add new farm";
+    ViewData["Title"] = "Create farm";
 }
 
 <div class="container">
@@ -55,7 +55,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                @Html.ActionLink("Add", "Add", "Farm", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "btn btn-success" })
+                <input type="submit" value="Create" class="btn btn-success"/>
                 @Html.ActionLink("Cancel", "Index", "HomeAdmin", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "btn btn-danger" })
             </div>
         </div>
