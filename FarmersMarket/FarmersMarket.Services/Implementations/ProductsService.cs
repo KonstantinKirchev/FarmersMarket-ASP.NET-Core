@@ -10,17 +10,14 @@
 
     public class ProductsService : Service, IProductsService
     {
-        private readonly IMapper mapper;
-
-        public ProductsService(FarmersMarketDbContext db, IMapper mapper)
-            : base(db)
+        public ProductsService(FarmersMarketDbContext db, IMapper mapper) 
+            : base(db, mapper)
         {
-            this.mapper = mapper;
         }
 
         public IEnumerable<ProductViewModel> GetAllProducts()
         {
-            IEnumerable<Product> products = this.db.Products.Where(p => p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id);
+            IEnumerable<Product> products = this.db.Products.Where(p => p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
             IEnumerable<ProductViewModel> viewModels = this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
 
             return viewModels;
@@ -28,21 +25,21 @@
 
         public IEnumerable<ProductViewModel> GetFilteredProducts(string category)
         {
-            IEnumerable<Product> products = this.db.Products.Where(p => p.Category.Name == category && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id);
+            IEnumerable<Product> products = this.db.Products.Where(p => p.Category.Name == category && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
             IEnumerable<ProductViewModel> viewModels = this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
             return viewModels;
         }
 
         public IEnumerable<ProductViewModel> GetSearchedProducts(string product)
         {
-            IEnumerable<Product> products = this.db.Products.Where(p => p.Name.Contains(product) && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id);
+            IEnumerable<Product> products = this.db.Products.Where(p => p.Name.Contains(product) && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
             IEnumerable<ProductViewModel> viewModels = this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
             return viewModels;
         }
 
         public IEnumerable<ProductViewModel> GetProductsByFarm(string farm)
         {
-            IEnumerable<Product> products = this.db.Products.Where(p => p.Owner.Name == farm && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id);
+            IEnumerable<Product> products = this.db.Products.Where(p => p.Owner.Name == farm && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
             IEnumerable<ProductViewModel> viewModels = this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
             return viewModels;
         }
@@ -175,15 +172,15 @@
                                 {
                                     Value = x.Id.ToString(),
                                     Text = x.Name
-                                });
+                                }
+                        )
+                        .ToList();
 
             return new SelectList(categories, "Value", "Text");
         }
 
         private IEnumerable<SelectListItem> GetCategoriesById(int id)
         {
-            //var productName = db.Products.Find(id).Name;
-
             var categories = this.db
                         .Categories
                         .Select(x =>
@@ -192,7 +189,9 @@
                                     Value = x.Id.ToString(),
                                     Text = x.Name,
                                     Selected = x.Id == id
-                                });
+                                }
+                        )
+                        .ToList();
 
             return new SelectList(categories, "Value", "Text", id);
         }
@@ -207,7 +206,9 @@
                                 {
                                     Value = x.Id.ToString(),
                                     Text = x.Name
-                                });
+                                }
+                        )
+                        .ToList();
 
             return new SelectList(farms, "Value", "Text");
         }
@@ -222,7 +223,9 @@
                                     Value = x.Id.ToString(),
                                     Text = x.Name,
                                     Selected = x.Id == id
-                                });
+                                }
+                        )
+                        .ToList();
 
             return new SelectList(farms, "Value", "Text", id);
         }

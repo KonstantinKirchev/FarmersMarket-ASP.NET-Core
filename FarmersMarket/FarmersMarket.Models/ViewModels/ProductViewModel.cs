@@ -1,9 +1,11 @@
 ﻿namespace FarmersMarket.Models.ViewModels
 {
+    using FarmersMarket.Models.EntityModels;
+    using FarmersMarket.Models.Infrastructure.Mapping;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using System.ComponentModel.DataAnnotations;
 
-    public class ProductViewModel
+    public class ProductViewModel : IMapFrom<Product>
     {
         public int Id { get; set; }
 

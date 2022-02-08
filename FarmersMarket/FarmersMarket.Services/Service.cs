@@ -1,35 +1,17 @@
 ﻿namespace FarmersMarket.Services
 {
+    using AutoMapper;
     using FarmersMarket.Data;
 
     public abstract class Service
     {
-        public FarmersMarketDbContext db;
+        protected readonly FarmersMarketDbContext db;
+        protected readonly IMapper mapper;
 
-        protected Service(FarmersMarketDbContext db)
+        protected Service(FarmersMarketDbContext db, IMapper mapper)
         {
             this.db = db;
+            this.mapper = mapper;
         }
-
-        //protected Service(FarmersMarketDbContext db, User user)
-        //    : this(db)
-        //{
-        //    this.UserProfile = user;
-        //}
-
-        //public FarmersMarketDbContext db { get; private set; }
-
-        //public User UserProfile { get; set; }
-
-        //protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
-        //{
-        //    if (requestContext.HttpContext.User.Identity.IsAuthenticated)
-        //    {
-        //        var username = requestContext.HttpContext.User.Identity.Name;
-        //        var user = this.db.Users.All().FirstOrDefault(u => u.UserName == username);
-        //        this.UserProfile = user;
-        //    }
-        //    return base.BeginExecute(requestContext, callback, state);
-        //}
     }
 }

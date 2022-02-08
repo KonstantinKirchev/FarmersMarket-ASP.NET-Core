@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace FarmersMarket.Models.ViewModels
+﻿namespace FarmersMarket.Models.ViewModels
 {
-    public class UserViewModel
+    using FarmersMarket.Models.EntityModels;
+    using FarmersMarket.Models.Infrastructure.Mapping;
+    using System.ComponentModel.DataAnnotations;
+
+    public class UserViewModel : IMapFrom<User>
     {
         public string Id { get; set; }
 

@@ -9,12 +9,9 @@
 
     public class OrdersService : Service, IOrdersService
     {
-        private readonly IMapper mapper;
-
-        public OrdersService(FarmersMarketDbContext db, IMapper mapper)
-            : base(db)
+        public OrdersService(FarmersMarketDbContext db, IMapper mapper) 
+            : base(db, mapper)
         {
-            this.mapper = mapper;
         }
 
         public IEnumerable<OrderViewModel> GetAllOrders()

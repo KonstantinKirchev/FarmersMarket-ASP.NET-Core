@@ -9,17 +9,14 @@
 
     public class FarmsService : Service, IFarmsService
     {
-        private readonly IMapper mapper;
-
-        public FarmsService(FarmersMarketDbContext db, IMapper mapper)
-            : base(db)
+        public FarmsService(FarmersMarketDbContext db, IMapper mapper) 
+            : base(db, mapper)
         {
-            this.mapper = mapper;
         }
 
         public IEnumerable<FarmViewModel> GetAllFarms()
         {
-            IEnumerable<Farm> farms = this.db.Farms.Where(f => f.IsDeleted == false).OrderBy(f => f.Id);
+            IEnumerable<Farm> farms = this.db.Farms.Where(f => f.IsDeleted == false).OrderBy(f => f.Id).ToList();
             IEnumerable<FarmViewModel> viewModels = this.mapper.Map<IEnumerable<Farm>, IEnumerable<FarmViewModel>>(farms);
             return viewModels;
         }

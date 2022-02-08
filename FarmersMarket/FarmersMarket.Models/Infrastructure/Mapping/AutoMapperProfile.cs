@@ -1,8 +1,6 @@
 ﻿namespace FarmersMarket.Models.Infrastructure.Mapping
 {
     using AutoMapper;
-    using EntityModels;
-    using ViewModels;
 
     public class AutoMapperProfile : Profile
     {
