@@ -36,7 +36,7 @@
             {
                 service.CreateNewFarm(model);
 
-                return RedirectToAction("All", "Farms", routeValues: new { area = "" });
+                return RedirectToAction("Index", "Farms", routeValues: new { area = "Admin" });
             }
 
             return this.View();
