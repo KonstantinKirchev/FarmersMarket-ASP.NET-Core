@@ -183,6 +183,7 @@
         {
             var categories = this.db
                         .Categories
+                        .Where(c => c.IsDeleted == false)
                         .Select(x =>
                                 new SelectListItem
                                 {
@@ -217,6 +218,7 @@
         {
             var farms = this.db
                         .Farms
+                        .Where(c => c.IsDeleted == false)
                         .Select(x =>
                                 new SelectListItem
                                 {

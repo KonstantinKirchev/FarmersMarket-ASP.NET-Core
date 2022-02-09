@@ -46,7 +46,7 @@
         }
 
         [HttpGet]
-        [Route("{id}/products")]
+        [Route("{id}/products/details")]
         public IActionResult Products(int id)
         {
             IEnumerable<ShoppingCartProduct> viewModels = service.GetOrderProducts(id);

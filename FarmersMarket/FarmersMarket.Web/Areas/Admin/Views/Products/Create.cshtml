@@ -6,7 +6,7 @@
 }
 
 <div class="container">
-    @using (Html.BeginForm("Add", "Products", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("Create", "Products", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
         <h2 class="form-signin-heading">@ViewData["Title"]</h2>
@@ -62,7 +62,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-success"/>
-                @Html.ActionLink("Cancel", "Index", "HomeAdmin", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "btn btn-danger" })
+                @Html.ActionLink("Cancel", "Index", "Products", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "btn btn-danger" })
             </div>
         </div>
     }

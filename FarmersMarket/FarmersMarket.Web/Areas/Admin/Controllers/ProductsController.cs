@@ -15,7 +15,15 @@
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult Index()
+        {
+            IEnumerable<ProductViewModel> products = service.GetAllProducts();
+
+            return View(products);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
         {
             ProductViewModel model = service.GetAddProduct();
 
@@ -24,20 +32,20 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Add(ProductBindingModel model)
+        public IActionResult Create(ProductBindingModel model)
         {
             if (model != null && ModelState.IsValid)
             {
                 service.CreateNewProduct(model);
 
-                return RedirectToAction("All", "Products", routeValues: new { area = "" });
+                return RedirectToAction("Index", "Products", routeValues: new { area = "Admin" });
             }
 
             return this.View();
         }
 
         [HttpGet]
-        [Route("{id}/edit")]
+        [Route("Admin/Products/{id}/Edit")]
         public IActionResult Edit(int id)
         { 
             ProductViewModel? viewModel = service.GetEditProduct(id);
@@ -46,7 +54,7 @@
         }
 
         [HttpPost]
-        [Route("{id}/edit")]
+        [Route("Admin/Products/{id}/Edit")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(ProductBindingModel model)
         {
@@ -54,14 +62,14 @@
             {
                 service.EditProduct(model);
 
-                return RedirectToAction("All", "Products", routeValues: new { area = "" });
+                return RedirectToAction("Index", "Products", routeValues: new { area = "Admin" });
             }
 
             return this.View();
         }
 
         [HttpGet]
-        [Route("{id}/delete")]
+        [Route("Admin/Products/{id}/Delete")]
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -80,13 +88,13 @@
         }
 
         [HttpPost, ActionName("Delete")]
-        [Route("{id}/delete")]
+        [Route("Admin/Products/{id}/Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
             service.DeleteProduct(id);
 
-            return RedirectToAction("All", "Products", routeValues: new { area = "" });
+            return RedirectToAction("Index", "Products", routeValues: new { area = "Admin" });
         }
     }
 }

@@ -1,0 +1,26 @@
+﻿@using FarmersMarket.Models.ViewModels
+@model IEnumerable<ProductViewModel>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @Html.DisplayFor(product => product)
+
+</table>
+
+ <p>
+    <a  asp-area="Admin" asp-controller="Products" asp-action="Create" class="btn btn-success">Create</a>
+</p>
+
+
