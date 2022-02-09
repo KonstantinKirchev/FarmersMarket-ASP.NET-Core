@@ -15,14 +15,22 @@
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult Index()
+        {
+            IEnumerable<FarmViewModel> farms = service.GetAllFarms();
+
+            return View(farms);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Add(FarmBindingModel model)
+        public IActionResult Create(FarmBindingModel model)
         {
             if (model != null && ModelState.IsValid)
             {
@@ -35,7 +43,7 @@
         }
 
         [HttpGet]
-        [Route("{id}/edit")]
+        [Route("Admin/Farms/{id}/Edit")]
         public IActionResult Edit(int id)
         {
             FarmViewModel? viewModel = service.GetEditFarm(id);
@@ -49,7 +57,7 @@
         }
 
         [HttpPost]
-        [Route("{id}/edit")]
+        [Route("Admin/Farms/{id}/Edit")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(FarmBindingModel model)
         {
@@ -57,14 +65,14 @@
             {
                 service.EditFarm(model);
 
-                return RedirectToAction("All", "Farms", routeValues: new { area = "" });
+                return RedirectToAction("Index", "Farms", routeValues: new { area = "Admin" });
             }
 
             return this.View();
         }
 
         [HttpGet]
-        [Route("{id}/delete")]
+        [Route("Admin/Farms/{id}/delete")]
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -83,13 +91,13 @@
         }
 
         [HttpPost, ActionName("Delete")]
-        [Route("{id}/delete")]
+        [Route("Admin/Farms/{id}/delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
             service.DeleteFarm(id);
            
-            return RedirectToAction("All", "Farms", routeValues: new { area = "" });
+            return RedirectToAction("Index", "Farms", routeValues: new { area = "Admin" });
         }
     }
 }

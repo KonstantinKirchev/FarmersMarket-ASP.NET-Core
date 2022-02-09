@@ -5,7 +5,7 @@
 }
 
 <div class="container">
-    @using (Html.BeginForm("Add", "Farms", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+    @using (Html.BeginForm("Create", "Farms", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
     {
         @Html.AntiForgeryToken()
         <h2 class="form-signin-heading">@ViewData["Title"]</h2>

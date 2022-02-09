@@ -1,8 +1,8 @@
 ﻿@using FarmersMarket.Models.ViewModels
-@model IEnumerable<CategoryViewModel>
+@model IEnumerable<FarmViewModel>
 
 @{
-    ViewData["Title"] = "Categories";
+    ViewData["Title"] = "Farms";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -15,12 +15,12 @@
         <th>Action</th>
     </tr>
 
-    @Html.DisplayFor(category => category)
+    @Html.DisplayFor(farm => farm)
 
 </table>
 
  <p>
-    <a  asp-area="Admin" asp-controller="Categories" asp-action="Create" class="btn btn-success">Create</a>
+    <a  asp-area="Admin" asp-controller="Farms" asp-action="Create" class="btn btn-success">Create</a>
 </p>
 
 
