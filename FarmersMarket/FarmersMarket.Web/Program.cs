@@ -27,6 +27,8 @@ builder.Services.AddMvc(options =>
     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
 });
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IFarmsService, FarmsService>();
