@@ -4,12 +4,8 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
 
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        public HomeController()
-        {
-        }
-
         public IActionResult Index()
         {
             return View();
