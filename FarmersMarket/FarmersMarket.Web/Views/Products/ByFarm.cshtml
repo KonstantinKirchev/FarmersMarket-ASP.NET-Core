@@ -1,0 +1,26 @@
+﻿@model IPagedList<ProductViewModel>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="container">
+    <div hidden="hidden" id="productToCart" class="alert alert-dismissible alert-success">The product was successfully added to your shopping cart</div>
+    <h1 class="page-header">@ViewData["Title"]</h1>
+    <div class="form-group">
+        @using (Html.BeginForm("Search", "Products", FormMethod.Get, new { role = "search" }))
+            {
+            <div class="input-group">
+                @Html.TextBox("product", ViewBag.currentFilter as string, new { @class = "form-control", placeholder = "Search by product name" })
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </span>
+            </div>
+        }
+    </div>
+    @Html.DisplayFor(product => product)
+</div>
+@if (Model.PageCount > 1)
+{
+    @Html.PagedListPager(Model, page => Url.Action("ByFarm", new { page }))
+}

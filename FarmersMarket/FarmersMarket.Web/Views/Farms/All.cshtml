@@ -1,0 +1,18 @@
+﻿@model IPagedList<FarmViewModel>
+
+@{
+    ViewData["Title"]= "Farms";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">@ViewData["Title"]</h1>
+        </div>
+        @Html.DisplayFor(farm => farm)
+    </div>
+    @if (Model.PageCount > 1)
+    {
+        @Html.PagedListPager(Model, page => Url.Action("All", new { page }))
+    }
+</div>

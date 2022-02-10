@@ -1,0 +1,45 @@
+﻿@model FarmViewModel
+
+<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding: 10px;">
+    <div class="hovereffect">
+         <img src="@Model.ImageUrl" asp-append-version="true" alt="Farm image" width="400" height="200" style="max-width:100%;"/>
+        @*@Html.Image(Model.ImageUrl, "Farm image")*@
+    </div>
+    <h4>@Model.Address</h4>
+    <h3><a style="cursor: pointer;" data-toggle="modal" data-target="#myModal_@Model.Id">@Model.Name</a></h3>
+    @if (User.IsInRole("Admin"))
+    {
+        <p>
+            @Html.ActionLink("Edit", "Edit", "Farms", routeValues: new { area = "Admin", id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+            @Html.ActionLink("Delete", "Delete", "Farms", routeValues: new { area = "Admin", id = Model.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+        </p>
+    }
+
+    <div class="modal fade" id="myModal_@Model.Id" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">@Model.Name</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <p><strong>Address:</strong> @Model.Address</p>
+                        <p><strong>Email:</strong> @Model.Email</p>
+                        <p><strong>Phone number:</strong> @Model.PhoneNumber</p>
+                        <p><strong>Description:</strong> @Model.Description</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @Html.ActionLink("Products", "ByFarm", "Products", routeValues: new { area = "", farmName = Model.Name }, htmlAttributes: new { @class = "btn btn-success" })
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

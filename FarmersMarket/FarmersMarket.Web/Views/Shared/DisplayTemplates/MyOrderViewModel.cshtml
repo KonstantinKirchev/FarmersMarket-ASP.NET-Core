@@ -1,0 +1,11 @@
+﻿@model MyOrderViewModel
+    
+<tr>
+    <td>@Model.Id</td>
+    <td>@Model.DateOfOrder</td>
+    <td>@Model.DateOfDelivery</td>
+    <td>@Html.ActionLink("products", "Products", "ShoppingCart", routeValues: new { area = "", id = Model.Id }, htmlAttributes: null)</td>
+    <td>@Model.TotalPrice lv.</td>
+    <td>@Model.Status</td>
+</tr>
+

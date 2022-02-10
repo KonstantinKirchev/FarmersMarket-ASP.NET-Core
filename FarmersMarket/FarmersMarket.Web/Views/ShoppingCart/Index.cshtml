@@ -1,0 +1,8 @@
+﻿@model IEnumerable<ShoppingCartProductViewModel>
+
+@{
+    ViewData["Title"] = "My shopping cart";
+    ViewBag.ShoppingCartId = null;
+}
+
+<partial name="_ShoppingCartPartial" for="@Model">

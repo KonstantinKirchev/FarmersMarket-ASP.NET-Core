@@ -1,0 +1,126 @@
+﻿@model IEnumerable<ShoppingCartProductViewModel>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="container" style="text-align: center; color: red;">
+        <h1>You don't have any products in your shopping cart.</h1>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div hidden="hidden" id="removeProduct" class="alert alert-dismissible alert-danger">The product was removed!</div>
+        <div hidden="hidden" id="increaseQuantity" class="alert alert-dismissible alert-success">The product quantity was increased!</div>
+        <div hidden="hidden" id="decreaseQuantity" class="alert alert-dismissible alert-danger">The product quantity was decreased!</div>
+        <div hidden="hidden" id="ordered" class="alert alert-dismissible alert-success">Your order was successfully send!</div>
+        <h1 style="text-align: center;">@ViewBag.Title</h1>
+        <div class="cart" id="myCart">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        decimal total = 0.00m;
+                    }
+                    @foreach (var cart in Model)
+                    {
+                        ViewBag.ShoppingCartId = cart.ShoppingCartId;
+
+                        total += (cart.Product.Price * cart.Units);
+                        <tr>
+                            <td>@cart.Product.Name</td>
+                            <td>
+                                <a data-ajax="true"
+                                   data-ajax-loading="#decreaseQuantity"
+                                   data-ajax-update="#myCart"
+                                   data-ajax-mode="replace"
+                                   data-ajax-method="GET"
+                                   href='@Url.Action("DecreaseProductUnits", "ShoppingCart", new { area = "", cartId = cart.ShoppingCartId, id = cart.ProductId })'
+                                   class="btn btn-danger btn-xs">-
+                                </a>
+                                @*@Ajax.ActionLink("-", "DecreaseProductUnits", "ShoppingCart", new { area = "", cartId = cart.ShoppingCartId, id = cart.ProductId }, new AjaxOptions()
+                           {
+                               HttpMethod = "GET",
+                               UpdateTargetId = "myCart",
+                               InsertionMode = InsertionMode.Replace,
+                               LoadingElementId = "decreaseQuantity",
+                               LoadingElementDuration = 1000
+                           }, new { @class = "btn btn-danger btn-xs" })*@
+
+                                <span>@cart.Units</span>
+
+                                <a data-ajax="true"
+                                   data-ajax-loading="#increaseQuantity"
+                                   data-ajax-update="#myCart"
+                                   data-ajax-mode="replace"
+                                   data-ajax-method="GET"
+                                   href='@Url.Action("IncreaseProductUnits", "ShoppingCart", new { area = "", cartId = cart.ShoppingCartId, id = cart.ProductId })'
+                                   class="btn btn-success btn-xs">+
+                                </a>
+
+                                @*@Ajax.ActionLink("+", "IncreaseProductUnits", "ShoppingCart", new { area = "", cartId = cart.ShoppingCartId, id = cart.ProductId }, new AjaxOptions()
+                           {
+                               HttpMethod = "GET",
+                               UpdateTargetId = "myCart",
+                               InsertionMode = InsertionMode.Replace,
+                               LoadingElementId = "increaseQuantity",
+                               LoadingElementDuration = 1000
+                           }, new { @class = "btn btn-success btn-xs" })*@
+                            </td>
+                            <td>@(cart.Product.Price * cart.Units)</td>
+                            <td>
+                                <a data-ajax="true"
+                                   data-ajax-loading="#removeProduct"
+                                   data-ajax-update="#myCart"
+                                   data-ajax-mode="replace"
+                                   data-ajax-method="GET"
+                                   data-ajax-confirm = "Are you sure you want to remove this product from your shopping cart?"
+                                   href='@Url.Action("RemoveProduct", "ShoppingCart", new { area = "", cartId = cart.ShoppingCartId, id = cart.ProductId })'
+                                   class="btn btn-danger btn-sm">Remove
+                                </a>
+
+                              @*  @Ajax.ActionLink("Remove", "RemoveProduct", "ShoppingCart", new { area = "", cartId = cart.ShoppingCartId, id = cart.ProductId }, new AjaxOptions()
+                           {
+                               HttpMethod = "GET",
+                               UpdateTargetId = "myCart",
+                               InsertionMode = InsertionMode.Replace,
+                               LoadingElementId = "removeProduct",
+                               LoadingElementDuration = 1000,
+                               Confirm = "Are you sure you want to remove this product from your shopping cart?"
+                           }, new { @class = "btn btn-danger btn-sm" })*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <h2>Total: @total lv.</h2>
+             <a data-ajax="true"
+                data-ajax-loading="#ordered"
+                data-ajax-update="#myCart"
+                data-ajax-mode="replace"
+                data-ajax-method="GET"
+                data-ajax-confirm = "Are you sure you want to remove this product from your shopping cart?"
+                href='@Url.Action("PlaceOrder", "ShoppingCart", new { area = "", id = ViewBag.ShoppingCartId, totalAmount = total })'
+                class="btn btn-success">Place Order
+            </a>
+@*
+            @Ajax.ActionLink("Order now", "PlaceOrder", "ShoppingCart", new { area = "", id = ViewBag.ShoppingCartId, totalAmount = total }, new AjaxOptions()
+       {
+           HttpMethod = "GET",
+           UpdateTargetId = "myCart",
+           InsertionMode = InsertionMode.Replace,
+           LoadingElementId = "ordered",
+           LoadingElementDuration = 2000
+       }, new { @class = "btn btn-success" })*@
+            <br>
+            <br>
+        </div>
+
+    </div>
+}
