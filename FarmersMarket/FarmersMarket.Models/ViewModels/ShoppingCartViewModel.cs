@@ -1,9 +1,10 @@
 ﻿namespace FarmersMarket.Models.ViewModels
 {
     using FarmersMarket.Models.EntityModels;
+    using FarmersMarket.Models.Infrastructure.Mapping;
     using System.ComponentModel.DataAnnotations;
 
-    public class ShoppingCartViewModel
+    public class ShoppingCartViewModel : IMapFrom<ShoppingCart>
     {
         public ShoppingCartViewModel()
         {

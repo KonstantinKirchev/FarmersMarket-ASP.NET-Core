@@ -2,9 +2,10 @@
 {
     using FarmersMarket.Models.EntityModels;
     using FarmersMarket.Models.Enums;
+    using FarmersMarket.Models.Infrastructure.Mapping;
     using System.ComponentModel.DataAnnotations;
 
-    public class MyOrderViewModel
+    public class MyOrderViewModel : IMapFrom<ShoppingCart>
     {
         public MyOrderViewModel()
         {
