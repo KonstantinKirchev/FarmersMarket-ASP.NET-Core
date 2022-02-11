@@ -6,6 +6,7 @@
     using Models.ViewModels;
     using Models.BindingModels;
     using FarmersMarket.Services.Interfaces;
+    using FarmersMarket.Web.Infrastructure;
 
     public class CategoriesController : BaseAdminController
     {
@@ -46,7 +47,9 @@
             if (model != null && ModelState.IsValid)
             {
                 this.service.CreateNewCategory(model);
-                
+
+                this.TempData["SuccessMessage"] = MessagesConstants.CreateNewCategorySuccessMessage;
+
                 return RedirectToAction("Index");
             }
 

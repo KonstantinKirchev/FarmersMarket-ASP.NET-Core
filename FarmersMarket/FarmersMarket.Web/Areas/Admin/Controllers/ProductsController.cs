@@ -3,6 +3,7 @@
     using FarmersMarket.Models.BindingModels;
     using FarmersMarket.Models.ViewModels;
     using FarmersMarket.Services.Interfaces;
+    using FarmersMarket.Web.Infrastructure;
     using Microsoft.AspNetCore.Mvc;
 
     public class ProductsController : BaseAdminController
@@ -37,6 +38,8 @@
             if (model != null && ModelState.IsValid)
             {
                 service.CreateNewProduct(model);
+
+                this.TempData["SuccessMessage"] = MessagesConstants.CreateNewProductSuccessMessage;
 
                 return RedirectToAction("Index", "Products", routeValues: new { area = "Admin" });
             }
