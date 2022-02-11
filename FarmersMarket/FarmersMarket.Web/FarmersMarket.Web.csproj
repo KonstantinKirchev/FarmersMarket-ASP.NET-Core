@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-FarmersMarket.Web-B93D105F-3B17-4516-8EE3-F23DFE4E67C4</UserSecretsId>
   </PropertyGroup>
