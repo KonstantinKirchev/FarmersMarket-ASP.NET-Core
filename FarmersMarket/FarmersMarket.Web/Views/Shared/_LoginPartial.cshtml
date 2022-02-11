@@ -1,15 +1,33 @@
-﻿@using FarmersMarket.Models.EntityModels
-@using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name</a>
+    @if (!User.IsInRole("Admin"))
+    {
+        <li>
+                <a class="nav-link text-dark fa fa-shopping-cart" asp-area="" asp-controller="ShoppingCart" asp-action="Index"></a>
+            @*@Html.Raw(@Html.ActionLink("Cart", "Index", "ShoppingCart", null, new { @class = "fa fa-shopping-cart" }).ToHtmlString().Replace("Cart", ""))*@
+        </li>
+        <li id="notes">
+            <a href="javascript:;" class="icon-btn notification-btn notification-active text-decoration-none">
+                <span class="cell">
+                    <span class="icon-wrap" id="notify">
+                        <i class="fa fa-bell"></i>
+                        <span class="notification-count">
+                            <span class="table-holder"><span class="circle-cell">0</span></span>
+                        </span>
+                    </span>
+                </span>
+            </a>
+        </li>
+    }
+    <li>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Index" title="Manage">Hello @User.Identity?.Name</a>
     </li>
-    <li class="nav-item">
+    <li>
         <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
             <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
         </form>
