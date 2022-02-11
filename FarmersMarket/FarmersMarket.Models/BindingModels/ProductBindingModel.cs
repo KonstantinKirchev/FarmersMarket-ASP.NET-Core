@@ -20,7 +20,10 @@
 
         [Required(AllowEmptyStrings = false, ErrorMessage = ModelsConstants.RequiredValidationMessage)]
         [StringLength(10, ErrorMessage = ModelsConstants.StringLengthValidationMessage)]
-        public string Quantity { get; set; }
+        public string Unit { get; set; }
+
+        [Range(0, 9999.99, ErrorMessage = "Quantity should be between {1} and {2}.")]
+        public int Quantity { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = ModelsConstants.RequiredValidationMessage)]
         [Url(ErrorMessage = ModelsConstants.UrlValidationMessage)]
