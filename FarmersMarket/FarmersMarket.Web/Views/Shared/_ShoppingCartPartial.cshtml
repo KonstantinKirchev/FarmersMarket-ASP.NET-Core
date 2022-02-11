@@ -105,7 +105,6 @@ else
                 data-ajax-update="#myCart"
                 data-ajax-mode="replace"
                 data-ajax-method="GET"
-                data-ajax-confirm = "Are you sure you want to remove this product from your shopping cart?"
                 href='@Url.Action("PlaceOrder", "ShoppingCart", new { area = "", id = ViewBag.ShoppingCartId, totalAmount = total })'
                 class="btn btn-success">Place Order
             </a>
