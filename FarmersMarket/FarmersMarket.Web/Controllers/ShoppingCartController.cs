@@ -3,10 +3,10 @@
     using FarmersMarket.Models.EntityModels;
     using FarmersMarket.Models.ViewModels;
     using FarmersMarket.Services.Interfaces;
+    using FarmersMarket.Web.Infrastructure;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
 
-    [Route("shoppingcart")]
     public class ShoppingCartController : BaseController
     {
         private readonly IShoppingCartService service;
@@ -24,6 +24,7 @@
             if (!service.IsProfileComplete(this.userService.GetCurrentUser().Result))
             {
                 TempData["controllerName"] = this.ControllerContext.RouteData.Values["controller"]?.ToString();
+                TempData["InfoMessage"] = "Please fill out all your profile information before placing an order.";
                 return this.RedirectToAction("Edit", "Profile");
             }
 
@@ -33,7 +34,7 @@
         }
 
         [HttpGet]
-        [Route("addproduct/{id}")]
+        [Route("/shoppingcart/addproduct/{id}")]
         public IActionResult AddProduct(int id)
         {
             Product? product = service.GetProduct(id);
@@ -43,13 +44,14 @@
             if (product != null)
             {
                 service.AddToShoppingCart(cart, product);
+                this.TempData["SuccessMessage"] = MessagesConstants.AddProductToCartSuccessMessage;
             }
 
             return this.RedirectToAction("All", "Products");
         }
 
         [HttpGet]
-        [Route("cart/{cartId}/removeproduct/{id}")]
+        [Route("/shoppingcart/cart/{cartId}/removeproduct/{id}")]
         public IActionResult RemoveProduct(int cartId, int id)
         {
             Product? product = service.GetProduct(id);
@@ -59,6 +61,7 @@
             if (product != null && cart != null)
             {
                 service.RemoveFromShoppingCart(cart, product);
+                this.TempData["SuccessMessage"] = MessagesConstants.RemoveProductFromCartSuccessMessage;
             }
 
             IEnumerable<ShoppingCartProductViewModel> carts = service.MyShoppingCart(this.userService.GetCurrentUser().Result);
@@ -67,7 +70,7 @@
         }
 
         [HttpGet]
-        [Route("cart/{cartId}/decreaseproductunits/{id}")]
+        [Route("/shoppingcart/cart/{cartId}/decreaseproductunits/{id}")]
         public IActionResult DecreaseProductUnits(int cartId, int id)
         {
             Product? product = service.GetProduct(id);
@@ -85,7 +88,7 @@
         }
 
         [HttpGet]
-        [Route("cart/{cartId}/increaseproductunits/{id}")]
+        [Route("/shoppingcart/cart/{cartId}/increaseproductunits/{id}")]
         public IActionResult IncreaseProductUnits(int cartId, int id)
         {
             Product? product = service.GetProduct(id);
@@ -103,7 +106,7 @@
         }
 
         [HttpGet]
-        [Route("placeorder/{id}")]
+        [Route("/shoppingcart/placeorder/{id}")]
         public IActionResult PlaceOrder(int id, decimal totalAmount)
         {
             if (!service.IsProfileComplete(this.userService.GetCurrentUser().Result))
