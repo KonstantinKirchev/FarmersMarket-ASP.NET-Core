@@ -6,6 +6,7 @@
     using FarmersMarket.Models.Enums;
     using FarmersMarket.Models.ViewModels;
     using FarmersMarket.Services.Interfaces;
+    using Microsoft.EntityFrameworkCore;
 
     public class ShoppingCartService : Service, IShoppingCartService
     {
@@ -45,7 +46,10 @@
         {
             IEnumerable<ShoppingCartProduct> shoppingcarts =
                 this.db.ShoppingCartProducts
-                    .Where(s => s.ShoppingCart.UserId == user.Id && s.ShoppingCart.Status == OrderStatus.Open).ToList();
+                    .Where(s => s.ShoppingCart.UserId == user.Id && s.ShoppingCart.Status == OrderStatus.Open)
+                    .Include(s => s.Product)
+                    .Include(s => s.ShoppingCart)
+                    .ToList();
 
             IEnumerable<ShoppingCartProductViewModel> viewModels = this.mapper.Map<IEnumerable<ShoppingCartProduct>, IEnumerable<ShoppingCartProductViewModel>>(shoppingcarts);
 
@@ -162,9 +166,14 @@
 
         public IEnumerable<ShoppingCartProduct> GetOrderProducts(int id)
         {
-            var products =
+            IEnumerable<ShoppingCartProduct> products =
                 this.db.ShoppingCartProducts
-                .Where(sp => sp.ShoppingCartId == id).ToList();
+                .Where(s => s.ShoppingCartId == id)
+                .Include(s => s.Product)
+                .Include(s => s.ShoppingCart)
+                .Include(s => s.Product.Owner)
+                .Include(s => s.Product.Category)
+                .ToList();
 
             return products;
         }

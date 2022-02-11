@@ -66,6 +66,7 @@
                     Name = model.Name,
                     Description = model.Description,
                     Price = model.Price,
+                    Unit = model.Unit,
                     Quantity = model.Quantity,
                     ImageUrl = model.ImageUrl,
                     CategoryId = model.CategoryId,
@@ -79,6 +80,7 @@
                 existingProduct.IsDeleted = false;
                 existingProduct.Description = model.Description;
                 existingProduct.Price = model.Price;
+                existingProduct.Unit = model.Unit;
                 existingProduct.Quantity = model.Quantity;
                 existingProduct.ImageUrl = model.ImageUrl;
                 existingProduct.CategoryId = model.CategoryId;
@@ -106,6 +108,7 @@
                 ImageUrl = product.ImageUrl,
                 Name = product.Name,
                 Price = product.Price,
+                Unit = product.Unit,
                 Quantity = product.Quantity
             };
 
@@ -122,6 +125,7 @@
                 product.Description = model.Description;
                 product.ImageUrl = model.ImageUrl;
                 product.Price = model.Price;
+                product.Unit = model.Unit;
                 product.Quantity = model.Quantity;
                 product.CategoryId = model.CategoryId;
                 product.OwnerId = model.FarmId;
@@ -148,6 +152,7 @@
                 ImageUrl = product.ImageUrl,
                 Name = product.Name,
                 Price = product.Price,
+                Unit = product.Unit,
                 Quantity = product.Quantity
             };
 
