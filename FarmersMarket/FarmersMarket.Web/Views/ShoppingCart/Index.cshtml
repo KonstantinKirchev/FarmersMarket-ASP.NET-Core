@@ -6,3 +6,37 @@
 }
 
 <partial name="_ShoppingCartPartial" for="@Model">
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#status").change(function () {
+                var statusSelected = $("select option:selected").first().text();
+                var orderId = $("#order-Id").val();
+                if (statusSelected == 'Credit Card') {
+                    $("#payWithCreditCard").removeClass('d-none');
+                    $("#payWithCash").addClass('d-none');
+                } else {
+                    $("#payWithCreditCard").addClass('d-none');
+                    $("#payWithCash").removeClass('d-none');
+                    // $.get('Url.Action("RemoveCreditCardFromOrder", "Orders", new { area = "" })',
+                    //{ orderId: orderId }, function (data) {
+                    //    $("#orders").html(data);
+                    //});
+                }
+
+            });
+
+            //$("#credit-cards").change(function () {
+            //    var creitCardSelected = $("#credit-cards option:selected").first().text();
+            //    var id = $("#credit-cards option:selected").attr("id");
+            //    var orderId = $("#order-Id").val();
+            //    $.get('Url.Action("AddCreditCardToOrder", "Orders", new { area = "" })',
+            //        { cardId: id, orderId: orderId }, function (data) {
+            //            $("#orders").html(data);
+            //        });
+            //});
+        });
+    </script>
+}
