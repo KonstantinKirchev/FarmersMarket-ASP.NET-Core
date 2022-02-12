@@ -5,8 +5,9 @@
     using System.ComponentModel.DataAnnotations;
     using EntityModels;
     using Enums;
+    using FarmersMarket.Models.Infrastructure.Mapping;
 
-    public class OrderViewModel
+    public class OrderViewModel : IMapFrom<ShoppingCart>
     {
         public int Id { get; set; }
 
