@@ -25,7 +25,15 @@
         {
             ShoppingCart? shoppingcart =
                 this.db.ShoppingCarts
+                    .Include(s => s.ShoppingCartProducts)
                     .FirstOrDefault(s => s.UserId == user.Id && s.Status == OrderStatus.Open);
+
+            IEnumerable<ShoppingCartProduct> shoppingCartProducts =
+                this.db.ShoppingCartProducts
+                    .Where(s => s.ShoppingCart.UserId == user.Id && s.ShoppingCart.Status == OrderStatus.Open)
+                    .Include(s => s.Product)
+                    .Include(s => s.ShoppingCart)
+                    .ToList();
 
             if (shoppingcart == null)
             {
@@ -37,6 +45,12 @@
 
                 this.db.ShoppingCarts.Add(shoppingcart);
                 this.db.SaveChanges();
+            } else
+            {
+                foreach (var item in shoppingCartProducts)
+                {
+                    shoppingcart.ShoppingCartProducts.Add(item);
+                }
             }
 
             return shoppingcart;
@@ -147,6 +161,21 @@
             if (cart != null)
             {
                 cart.Status = OrderStatus.Pending;
+                cart.TotalPrice = totalAmount;
+                cart.DateOfOrder = DateTime.Now;
+
+                this.db.SaveChanges();
+            }
+        }
+
+        public void MakeAnOrderWithStripe(int id, decimal totalAmount)
+        {
+            ShoppingCart? cart = this.db.ShoppingCarts.Find(id);
+
+            if (cart != null)
+            {
+                cart.PaymentType = PaymentType.CreditCard;
+                cart.Status = OrderStatus.Placed;
                 cart.TotalPrice = totalAmount;
                 cart.DateOfOrder = DateTime.Now;
 

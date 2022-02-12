@@ -17,26 +17,14 @@
                 if (statusSelected == 'Credit Card') {
                     $("#payWithCreditCard").removeClass('d-none');
                     $("#payWithCash").addClass('d-none');
-                } else {
+                } else if (statusSelected == 'Cash') {
                     $("#payWithCreditCard").addClass('d-none');
                     $("#payWithCash").removeClass('d-none');
-                    // $.get('Url.Action("RemoveCreditCardFromOrder", "Orders", new { area = "" })',
-                    //{ orderId: orderId }, function (data) {
-                    //    $("#orders").html(data);
-                    //});
+                } else {
+                    $("#payWithCreditCard").addClass('d-none');
+                    $("#payWithCash").addClass('d-none');
                 }
-
             });
-
-            //$("#credit-cards").change(function () {
-            //    var creitCardSelected = $("#credit-cards option:selected").first().text();
-            //    var id = $("#credit-cards option:selected").attr("id");
-            //    var orderId = $("#order-Id").val();
-            //    $.get('Url.Action("AddCreditCardToOrder", "Orders", new { area = "" })',
-            //        { cardId: id, orderId: orderId }, function (data) {
-            //            $("#orders").html(data);
-            //        });
-            //});
         });
     </script>
 }

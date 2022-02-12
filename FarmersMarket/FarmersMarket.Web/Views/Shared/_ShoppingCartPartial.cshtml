@@ -93,14 +93,6 @@ else
                     href='@Url.Action("PlaceOrderWithStripe", "ShoppingCart", new { area = "", id = ViewBag.ShoppingCartId, totalAmount = total })'
                     class="btn btn-success order-button">Pay now
                 </a>
-                @*@Ajax.ActionLink("Pay now", "PlaceOrderWithStripe", "Orders", new { area = "", id = ViewBag.OrderId, totalAmount = total }, new AjaxOptions()
-                  {
-                      HttpMetho = "GET",
-                      UpdateTargetId = "myOrder",
-                      InsertionMode = InsertionMode.Replace,
-                      LoadingElementId = "ordered",
-                      LoadingElementDuration = 3000
-                  }, new { @class = "btn btn-success order-button" })*@
             </div>
             <div class="form-group d-flex justify-content-end d-none" id="payWithCash">
                 <a data-ajax="true"
@@ -111,25 +103,7 @@ else
                     href='@Url.Action("PlaceOrder", "ShoppingCart", new { area = "", id = ViewBag.ShoppingCartId, totalAmount = total })'
                     class="btn btn-success order-button">Order now
                 </a>
-                @*@Ajax.ActionLink("Order now", "PlaceOrder", "Orders", new { area = "", id = ViewBag.OrderId, totalAmount = total }, new AjaxOptions()
-               {
-                   HttpMethod = "GET",
-                   UpdateTargetId = "myOrder",
-                   InsertionMode = InsertionMode.Replace,
-                   LoadingElementId = "ordered",
-                   LoadingElementDuration = 3000
-               }, new { @class = "btn btn-success order-button" })*@
             </div>
-           @* <div class="d-flex justify-content-end d-none">
-                <a data-ajax="true"
-                    data-ajax-loading="#ordered"
-                    data-ajax-update="#myCart"
-                    data-ajax-mode="replace"
-                    data-ajax-method="GET"
-                    href='@Url.Action("PlaceOrder", "ShoppingCart", new { area = "", id = ViewBag.ShoppingCartId, totalAmount = total })'
-                    class="btn btn-success">Place Order
-                </a>
-            </div>*@
             <br>
             <br>
         </div>

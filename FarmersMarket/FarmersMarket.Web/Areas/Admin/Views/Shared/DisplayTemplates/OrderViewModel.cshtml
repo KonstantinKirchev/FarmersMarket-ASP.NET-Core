@@ -9,6 +9,7 @@
     <td>@Html.ActionLink("client", "Client", "Orders", new { id = Model.Id }, null)</td>
     <td>@Html.ActionLink("products", "Products", "Orders", new { id = Model.Id }, null)</td>
     <td>@Model.TotalPrice lv.</td>
+    <td>@Model.PaymentType</td>
     <td>@Model.Status</td>
     @if (Model.Status == OrderStatus.Pending)
             {

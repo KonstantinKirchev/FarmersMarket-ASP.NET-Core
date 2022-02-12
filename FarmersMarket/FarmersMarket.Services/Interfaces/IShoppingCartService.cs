@@ -14,6 +14,7 @@
         void DecreaseProductUnitsFromShoppingCart(ShoppingCart cart, Product product);
         void IncreaseProductUnitsFromShoppingCart(ShoppingCart cart, Product product);
         void MakeAnOrder(int id, decimal totalAmount);
+        void MakeAnOrderWithStripe(int id, decimal totalAmount);
         bool IsProfileComplete(User user);
         IEnumerable<ShoppingCartProduct> GetOrderProducts(int id);
     }
