@@ -4,6 +4,7 @@
     {
         Open,
         Pending,
+        Placed,
         Delivered,
         Cancelled,
         InTransit,
