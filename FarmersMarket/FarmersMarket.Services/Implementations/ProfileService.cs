@@ -47,21 +47,19 @@
         public IEnumerable<MyOrderViewModel> GetOrdersByStatus(string status)
         {
             var user = this.GetCurrentUser().Result;
+            IEnumerable<ShoppingCart> orders;
 
-            IEnumerable<ShoppingCart> orders = this.db.ShoppingCarts;
-
-            if (status == "All")
+            if (status != "All")
             {
-                orders.Where(s => s.UserId == user.Id);
-
+                OrderStatus currentStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus), status);
+                orders = this.db.ShoppingCarts.Where(s => s.UserId == user.Id && s.Status == currentStatus).ToList();
             }
             else
             {
-                OrderStatus currentStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus), status);
-                orders.Where(s => s.UserId == user.Id && s.Status == currentStatus);
+                orders = this.db.ShoppingCarts.Where(s => s.UserId == user.Id).ToList();
             }
 
-            IEnumerable<MyOrderViewModel> viewModels = this.mapper.Map<IEnumerable<ShoppingCart>, IEnumerable<MyOrderViewModel>>(orders.ToList());
+            IEnumerable<MyOrderViewModel> viewModels = this.mapper.Map<IEnumerable<ShoppingCart>, IEnumerable<MyOrderViewModel>>(orders);
 
             return viewModels;
         }
