@@ -23,6 +23,11 @@
     </div>
     @if (Model.PageCount > 1)
     {
-        @Html.PagedListPager(Model, page => Url.Action("All", new { page }))
+        @Html.PagedListPager(Model, page => Url.Action("All", new { page }),
+            new PagedListRenderOptions {
+                LiElementClasses = new string[] { "page-item" },
+                PageClasses = new string[] { "page-link" }
+            }
+        )
     }
 </div>

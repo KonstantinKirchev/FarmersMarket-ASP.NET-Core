@@ -85,6 +85,17 @@ else
             </div>
              <br>
             <div class="form-group d-flex justify-content-end d-none" id="payWithCreditCard">
+               @* <form asp-controller="ShoppingCart" asp-action="PlaceOrderWithStripe" method="POST">
+                  <script
+                    src="https://checkout.stripe.com/checkout.js"
+                    class="stripe-button"
+                    data-key="pk_test_51IkXZJCdKFy9M6tT2qwwXhSeQNcGQptVSDyvKeywqHcdHqbbX1wzQZ1rEs9e3545o58CBhYd2soQL3BG3qLMMNwP007sc0Za4C"
+                    data-name="Custom t-shirt"
+                    data-description="Your custom designed t-shirt"
+                    data-amount="{{ORDER_AMOUNT}}"
+                    data-currency="cad">
+                  </script>
+                </form>*@
                 <a data-ajax="true"
                     data-ajax-loading="#ordered"
                     data-ajax-update="#myCart"
