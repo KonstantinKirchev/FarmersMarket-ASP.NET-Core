@@ -13,11 +13,13 @@
     {
         private readonly IShoppingCartService service;
         private readonly IProfileService userService;
+        private readonly IConfiguration configuration;
 
-        public ShoppingCartController(IShoppingCartService service, IProfileService userService)
+        public ShoppingCartController(IShoppingCartService service, IProfileService userService, IConfiguration configuration)
         {
             this.service = service;
             this.userService = userService;
+            this.configuration = configuration;
         }
 
         [HttpGet]
@@ -136,7 +138,7 @@
 
             ShoppingCart shoppingCart = service.GetShoppingCart(this.userService.GetCurrentUser().Result);
 
-            StripeConfiguration.ApiKey = "sk_test_51IkXZJCdKFy9M6tTaxjIzVYuu97QpMITGvFx1oSAWEZmr9JIWojPyUrBosYCJdcFyW42mb8ZJoLA84ZJZ1KxHGXg00cV0BRyKr";
+            StripeConfiguration.ApiKey = this.configuration["Stripe:SecretKey"];
 
             var options = new SessionCreateOptions
             {
@@ -145,8 +147,8 @@
                     "card",
                 },
                 LineItems = new List<SessionLineItemOptions> { },
-                SuccessUrl = "https://localhost:7177/Home",
-                CancelUrl = "https://localhost:7177/ShoppingCart"
+                SuccessUrl = "https://localhost:7177",  
+                CancelUrl = "https://localhost:7177"
             };
 
             foreach (var package in shoppingCart.ShoppingCartProducts)

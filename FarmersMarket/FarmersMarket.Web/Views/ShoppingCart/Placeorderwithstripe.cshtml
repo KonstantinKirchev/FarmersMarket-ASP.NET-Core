@@ -1,4 +1,6 @@
 ﻿@model Stripe.Checkout.Session
+@inject IConfiguration configuration
+
 @{
     ViewData["Title"] = "Placeorderwithstripe";
 }
@@ -6,7 +8,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
-    var stripe = Stripe('pk_test_51IkXZJCdKFy9M6tT2qwwXhSeQNcGQptVSDyvKeywqHcdHqbbX1wzQZ1rEs9e3545o58CBhYd2soQL3BG3qLMMNwP007sc0Za4C');
+    var stripe = Stripe(configuration["Stripe:PublishableKey"]);
     stripe.redirectToCheckout({
         sessionId: '@Model.Id'
     }).then(function (result) {
