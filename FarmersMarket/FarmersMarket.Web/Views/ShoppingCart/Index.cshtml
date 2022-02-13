@@ -10,20 +10,23 @@
 @section Scripts
 {
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#status").change(function () {
-                var statusSelected = $("select option:selected").first().text();
-                var orderId = $("#order-Id").val();
-                if (statusSelected == 'Credit Card') {
-                    $("#payWithCreditCard").removeClass('d-none');
-                    $("#payWithCash").addClass('d-none');
-                } else if (statusSelected == 'Cash') {
-                    $("#payWithCreditCard").addClass('d-none');
-                    $("#payWithCash").removeClass('d-none');
-                } else {
-                    $("#payWithCreditCard").addClass('d-none');
-                    $("#payWithCash").addClass('d-none');
-                }
+        $(document)
+        .ready(function () {
+            $(".container").bind("DOMSubtreeModified", function() {
+                $("#status").on("change", () => {
+                    var statusSelected = $("select option:selected").first().text();
+                    var orderId = $("#order-Id").val();
+                    if (statusSelected == 'Credit Card') {
+                        $("#payWithCreditCard").removeClass('d-none');
+                        $("#payWithCash").addClass('d-none');
+                    } else if (statusSelected == 'Cash') {
+                        $("#payWithCreditCard").addClass('d-none');
+                        $("#payWithCash").removeClass('d-none');
+                    } else {
+                        $("#payWithCreditCard").addClass('d-none');
+                        $("#payWithCash").addClass('d-none');
+                    }
+                });
             });
         });
     </script>

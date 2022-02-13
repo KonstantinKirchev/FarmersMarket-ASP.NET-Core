@@ -1,4 +1,9 @@
 ﻿@model IEnumerable<ShoppingCartProductViewModel>
+@inject IConfiguration configuration
+
+@{
+    decimal total = 0.00m;
+}
 
 @if (Model == null || !Model.Any())
 {
@@ -25,14 +30,12 @@ else
                     </tr>
                 </thead>
                 <tbody>
-                    @{
-                        decimal total = 0.00m;
-                    }
                     @foreach (var cart in Model)
                     {
                         ViewBag.ShoppingCartId = cart.ShoppingCartId;
 
                         total += (cart.Product.Price * cart.Units);
+
                         <tr>
                             <td>@cart.Product.Name</td>
                             <td>
@@ -83,27 +86,21 @@ else
                     </select>
                 </div>
             </div>
-             <br>
+                <br>
             <div class="form-group d-flex justify-content-end d-none" id="payWithCreditCard">
-               @* <form asp-controller="ShoppingCart" asp-action="PlaceOrderWithStripe" method="POST">
-                  <script
+                <form asp-controller="ShoppingCart" asp-action="PlaceOrderWithStripe" asp-route-total=@total asp-route-cartId=@Model.FirstOrDefault().ShoppingCartId method="POST">
+                    <script
                     src="https://checkout.stripe.com/checkout.js"
                     class="stripe-button"
-                    data-key="pk_test_51IkXZJCdKFy9M6tT2qwwXhSeQNcGQptVSDyvKeywqHcdHqbbX1wzQZ1rEs9e3545o58CBhYd2soQL3BG3qLMMNwP007sc0Za4C"
-                    data-name="Custom t-shirt"
-                    data-description="Your custom designed t-shirt"
-                    data-amount="{{ORDER_AMOUNT}}"
-                    data-currency="cad">
-                  </script>
-                </form>*@
-                <a data-ajax="true"
-                    data-ajax-loading="#ordered"
-                    data-ajax-update="#myCart"
-                    data-ajax-mode="replace"
-                    data-ajax-method="GET"
-                    href='@Url.Action("PlaceOrderWithStripe", "ShoppingCart", new { area = "", id = ViewBag.ShoppingCartId, totalAmount = total })'
-                    class="btn btn-success order-button">Pay now
-                </a>
+                    data-key=@configuration["Stripe:PublishableKey"]
+                    data-name="Farmers Market"
+                    data-description="Selling organic food"
+                    data-amount=@Convert.ToInt64((decimal)total * 100)
+                    data-currency="cad"
+                    data-locale="en"
+                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png">
+                    </script>
+                </form>
             </div>
             <div class="form-group d-flex justify-content-end d-none" id="payWithCash">
                 <a data-ajax="true"
@@ -115,11 +112,6 @@ else
                     class="btn btn-success order-button">Order now
                 </a>
             </div>
-            <br>
-            <br>
         </div>
-        <br />
-        <br />
-
     </div>
 }

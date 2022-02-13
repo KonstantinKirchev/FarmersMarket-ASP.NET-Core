@@ -8,6 +8,7 @@
         public const string CreateNewProductSuccessMessage = "You have successfully created a new product.";
         public const string AddProductToCartSuccessMessage = "Product added to the shopping cart.";
         public const string RemoveProductFromCartSuccessMessage = "Product removed from the shopping cart.";
+        public const string TheOrderWasSuccessfullyPlaced = "The order was placed successfully";
 
         // Error messages
 

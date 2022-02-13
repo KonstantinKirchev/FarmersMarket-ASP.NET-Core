@@ -126,9 +126,8 @@
             return this.PartialView("_ShoppingCartPartial", carts);
         }
 
-        [HttpGet]
-        [Route("/shoppingcart/placeorderwithstripe/{id}")]
-        public ActionResult PlaceOrderWithStripe(int id, decimal totalAmount)
+        [HttpPost]
+        public IActionResult PlaceOrderWithStripe(string stripeToken, string stripeEmail, decimal total, int cartId)
         {
             if (!service.IsProfileComplete(this.userService.GetCurrentUser().Result))
             {
@@ -136,42 +135,31 @@
                 return this.PartialView("_EditProfilePartial", viewModel);
             }
 
-            ShoppingCart shoppingCart = service.GetShoppingCart(this.userService.GetCurrentUser().Result);
-
             StripeConfiguration.ApiKey = this.configuration["Stripe:SecretKey"];
 
-            var options = new SessionCreateOptions
+            total = Math.Round(total, 2) * 100;
+            decimal tempAmount = total / 100;
+
+            var chargeOptions = new ChargeCreateOptions()
             {
-                PaymentMethodTypes = new List<string>
-                {
-                    "card",
-                },
-                LineItems = new List<SessionLineItemOptions> { },
-                SuccessUrl = "https://localhost:7177",  
-                CancelUrl = "https://localhost:7177"
+                Amount = Convert.ToInt64(total),
+                Currency = "CAD",
+                Description = "Selling organic food",
+                Source = stripeToken,
+                ReceiptEmail = stripeEmail
             };
 
-            foreach (var package in shoppingCart.ShoppingCartProducts)
+            var chargeService = new ChargeService();
+            Charge charge = chargeService.Create(chargeOptions);
+
+            if (charge.Status == "succeeded")
             {
-                options.LineItems.Add(
-                    new SessionLineItemOptions
-                    {
-                        Name = package.Product.Name,
-                        Description = package.Product.Description,
-                        Amount = (long?)(package.Product.Price * 100),
-                        Currency = "cad",
-                        Images = new List<string> { package.Product.ImageUrl },
-                        Quantity = 1
-                    }
-                );
+                service.MakeAnOrderWithStripe(cartId, tempAmount);
+                TempData["SuccessMessage"] = MessagesConstants.TheOrderWasSuccessfullyPlaced;
+                return this.RedirectToAction("All", "Products");
             }
 
-            var sessionService = new SessionService();
-            Session session = sessionService.Create(options);
-
-            service.MakeAnOrderWithStripe(id, totalAmount);
-
-            return View(session);
+            return View();
         }
 
         [HttpGet]
