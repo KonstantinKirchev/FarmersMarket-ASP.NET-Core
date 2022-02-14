@@ -31,7 +31,7 @@
         {
             IEnumerable<CategoryViewModel> categories = service.GetAllCategories();
 
-            return Json(categories, new Newtonsoft.Json.JsonSerializerSettings());
+            return Json(new { data = categories });
         }
 
         [HttpGet]
