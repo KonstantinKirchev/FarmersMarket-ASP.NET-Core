@@ -24,6 +24,11 @@
     </div>
     @if (Model.PageCount > 1)
     {
-        @Html.PagedListPager(Model, page => Url.Action("Search", new { page, currentFilter = ViewBag.CurrentFilter }))
+        @Html.PagedListPager(Model, page => Url.Action("Search", new { page, currentFilter = ViewBag.CurrentFilter }),
+            new PagedListRenderOptions {
+                LiElementClasses = new string[] { "page-item" },
+                PageClasses = new string[] { "page-link" }
+            }
+        )
     }
 </div>

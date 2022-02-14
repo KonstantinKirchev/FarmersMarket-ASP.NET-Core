@@ -20,7 +20,12 @@
 
 @if (Model.PageCount > 1)
 {
-    @Html.PagedListPager(Model, page => Url.Action("MyOrders", "Profile", new { page }))
+    @Html.PagedListPager(Model, page => Url.Action("MyOrders", "Profile", new { page }),
+        new PagedListRenderOptions {
+            LiElementClasses = new string[] { "page-item" },
+            PageClasses = new string[] { "page-link" }
+        }
+    )
 }
 
 
