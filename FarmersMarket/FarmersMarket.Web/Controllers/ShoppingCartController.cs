@@ -119,11 +119,15 @@
                 return this.PartialView("_EditProfilePartial", viewModel);
             }
 
+            IEnumerable<ShoppingCartProductViewModel> cartProducts = service.MyShoppingCart(this.userService.GetCurrentUser().Result);
+
             service.MakeAnOrder(id, totalAmount);
 
-            IEnumerable<ShoppingCartProductViewModel> carts = service.MyShoppingCart(this.userService.GetCurrentUser().Result);
+            service.DecreaseProductQuantity(cartProducts);
 
-            return this.PartialView("_ShoppingCartPartial", carts);
+            TempData["SuccessMessage"] = MessagesConstants.TheOrderWasSuccessfullyPlaced;
+
+            return this.RedirectToAction("All", "Products");
         }
 
         [HttpPost]
@@ -154,7 +158,9 @@
 
             if (charge.Status == "succeeded")
             {
+                IEnumerable<ShoppingCartProductViewModel> cartProducts = service.MyShoppingCart(this.userService.GetCurrentUser().Result);
                 service.MakeAnOrderWithStripe(cartId, tempAmount);
+                service.DecreaseProductQuantity(cartProducts);
                 TempData["SuccessMessage"] = MessagesConstants.TheOrderWasSuccessfullyPlaced;
                 return this.RedirectToAction("All", "Products");
             }

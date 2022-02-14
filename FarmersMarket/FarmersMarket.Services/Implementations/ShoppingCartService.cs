@@ -206,5 +206,25 @@
 
             return products;
         }
+
+        public void DecreaseProductQuantity(IEnumerable<ShoppingCartProductViewModel> carts)
+        {
+            foreach (var cart in carts)
+            {
+                Product? product = this.db.Products.Find(cart.ProductId);
+
+                if (product != null)
+                {
+                    if (product.Quantity >= cart.Units)
+                    {
+                        product.Quantity -= cart.Units;
+                    } else
+                    {
+                        product.Quantity = 0;
+                    }
+                    db.SaveChanges();
+                }
+            }
+        }
     }
 }

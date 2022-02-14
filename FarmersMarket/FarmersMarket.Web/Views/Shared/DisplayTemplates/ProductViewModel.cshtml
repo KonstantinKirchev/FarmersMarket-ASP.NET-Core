@@ -9,13 +9,19 @@
             <h3 style="display: flex; justify-content: space-between;"><span>@Model.Unit</span><span style="color: red;">@Model.Price lv</span></h3>
             @if (User.Identity != null && User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
             {
-               
+                if (Model.Quantity > 0)
+                {
                     <a data-ajax="true"
-                       data-ajax-loading="#productToCart"
-                       data-ajax-method="GET"
-                       href='@Url.Action("AddProduct", "ShoppingCart", new { area = "", id = Model.Id })'
-                       class="btn btn-primary">Add
+                        data-ajax-loading="#productToCart"
+                        data-ajax-method="GET"
+                        href='@Url.Action("AddProduct", "ShoppingCart", new { area = "", id = Model.Id })'
+                        class="btn btn-primary">Add
                     </a>
+                } else
+                {
+                    <p style="color:red;">Out of stock</p>
+                }
+                
             }
             @if (User.IsInRole("Admin"))
             {

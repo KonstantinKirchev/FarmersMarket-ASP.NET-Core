@@ -17,5 +17,6 @@
         void MakeAnOrderWithStripe(int id, decimal totalAmount);
         bool IsProfileComplete(User user);
         IEnumerable<ShoppingCartProduct> GetOrderProducts(int id);
+        void DecreaseProductQuantity(IEnumerable<ShoppingCartProductViewModel> carts);
     }
 }
