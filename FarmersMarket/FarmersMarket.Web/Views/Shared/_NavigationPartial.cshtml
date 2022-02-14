@@ -9,31 +9,9 @@
         <a class="nav-link text-dark" asp-area="" asp-controller="Farms" asp-action="All">Farms</a>
     </li>
     <li role="presentation" class="nav-item dropdown">
-           @* <a class="nav-link text-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Products
-            </a>*@
-           @* <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                Products <span class="caret"></span>
-            </a>*@
-           @* <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li>
-                    <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Products" asp-action="All" asp-route-area="" asp-route-category="">All</a>
-                </li>
-            </ul>*@
-           @* <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="All" asp-route-area="" asp-route-category="">All</a>
-                </li>
-                <li role="presentation">@Html.ActionLink("All", "All", "Products", routeValues: new { area = "", category = "" }, htmlAttributes: null)</li>
-            </ul>*@
-            <a class="nav-link text-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-    Product
-  </a>
-
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <li><a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Products" asp-action="All" asp-route-area="" asp-route-category="">All</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
+        <a class="nav-link text-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Products</a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Products" asp-action="All" asp-route-area="" asp-route-category="">All</a></li>
+        </ul>
     </li>
 </ul>
