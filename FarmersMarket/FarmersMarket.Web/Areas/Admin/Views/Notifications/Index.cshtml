@@ -6,7 +6,7 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<form asp-controller="Notifications" asp-action="SendNotification" data-ajax="true" data-ajax-method="POST">
+<form asp-controller="Notifications" asp-action="Notification" data-ajax="true" data-ajax-method="POST" data-ajax-oncomplete="clearMessage">
     <label for="type">Type:</label>
     <select id="type" name="type" class="form-control">
         <option value="info">Info</option>
@@ -44,6 +44,7 @@
 @section Scripts{
     <script>
         function clearMessage() {
+            console.log(1);
             $("#notification").val("");
         }
     </script>

@@ -1,9 +1,18 @@
 ﻿namespace FarmersMarket.Web.Areas.Admin.Controllers
 {
+    using FarmersMarket.Web.Hubs;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SignalR;
 
     public class NotificationsController : BaseAdminController
     {
+        protected IHubContext<NotificationsHub> context;
+
+        public NotificationsController(IHubContext<NotificationsHub> context)
+        {
+            this.context = context;
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -11,13 +20,10 @@
         }
 
         [HttpPost]
-        public IActionResult? SendNotification(string type, string notification)
+        public async Task Notification(string type, string notification)
         {
-            //var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationsHub>();
-
-            //hubContext.Clients.All.receiveNotification(type, notification);
-
-            return null;
+            var notificationHub = new NotificationsHub(this.context);
+            await notificationHub.SendNotification(type, notification);
         } 
     }
 }

@@ -331,3 +331,15 @@ body > div.container.body-content > table > tbody > tr > td {
 .card-body .btn {
     margin-right: 10px;
 }
+
+#notes {
+    padding-top: 7px;
+}
+
+#shopping-cart {
+    padding-top: 4px;
+}
+
+#notes .icon-btn {
+    color: #000 !important;
+}

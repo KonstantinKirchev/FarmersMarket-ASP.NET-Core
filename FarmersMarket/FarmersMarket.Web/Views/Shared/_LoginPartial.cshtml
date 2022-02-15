@@ -7,9 +7,8 @@
 {
     @if (!User.IsInRole("Admin"))
     {
-        <li>
-                <a class="nav-link text-dark fa fa-shopping-cart" asp-area="" asp-controller="ShoppingCart" asp-action="Index"></a>
-            @*@Html.Raw(@Html.ActionLink("Cart", "Index", "ShoppingCart", null, new { @class = "fa fa-shopping-cart" }).ToHtmlString().Replace("Cart", ""))*@
+        <li id="shopping-cart">
+            <a class="nav-link text-dark fa fa-shopping-cart" asp-area="" asp-controller="ShoppingCart" asp-action="Index"></a>
         </li>
         <li id="notes">
             <a href="javascript:;" class="icon-btn notification-btn notification-active text-decoration-none">

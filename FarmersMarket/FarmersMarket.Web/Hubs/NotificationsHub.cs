@@ -1,14 +1,19 @@
-﻿using Microsoft.AspNetCore.SignalR;
-
-namespace WomenMarket.App.Hubs
+﻿namespace FarmersMarket.Web.Hubs
 {
+    using Microsoft.AspNetCore.SignalR;
 
-    //[HubName("notifications")]
-    public class NotificationsHub : Hub
+    public class NotificationsHub : Hub, INotificationsHub
     {
-        public void SendNotification(string type, string notification)
+        protected IHubContext<Hub> context;
+
+        public NotificationsHub(IHubContext<Hub> context)
         {
-            //this.Clients.Others.receiveNotification(type, notification);
+            this.context = context;
+        }
+
+        public async Task SendNotification(string type, string notification)
+        {
+            await this.context.Clients.All.SendAsync("Send", type, notification);
         }
     }
 }
