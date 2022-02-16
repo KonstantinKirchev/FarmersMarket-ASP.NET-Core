@@ -22,21 +22,21 @@
                 </span>
             </a>
         </li>
-        <li id="lang-en" style="display:none;">
-            <a data-ajax="true"
-                data-ajax-method="GET"
-                href='@Url.Action("ChangeLanguage", "Home", new { area = "", culture = "en-US" })'
-                class="btn">EN
-            </a>
-        </li>
-        <li id="lang-bg">
-            <a data-ajax="true"
-                data-ajax-method="GET"
-                href='@Url.Action("ChangeLanguage", "Home", new { area = "", culture = "bg" })'
-                class="btn">BG
-            </a>
-        </li>
     }
+    <li id="lang-en" style="display:none;">
+        <a data-ajax="true"
+            data-ajax-method="GET"
+            href='@Url.Action("ChangeLanguage", "Home", new { area = "", culture = "en-US" })'
+            class="btn">EN
+        </a>
+    </li>
+    <li id="lang-bg">
+        <a data-ajax="true"
+            data-ajax-method="GET"
+            href='@Url.Action("ChangeLanguage", "Home", new { area = "", culture = "bg" })'
+            class="btn">BG
+        </a>
+    </li>
     <li>
         <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Index" title="Manage">Hello @User.Identity?.Name</a>
     </li>
@@ -48,6 +48,20 @@
 }
 else
 {
+    <li id="lang-en" style="display:none;">
+        <a data-ajax="true"
+            data-ajax-method="GET"
+            href='@Url.Action("ChangeLanguage", "Home", new { area = "", culture = "en-US" })'
+            class="btn">EN
+        </a>
+    </li>
+    <li id="lang-bg">
+        <a data-ajax="true"
+            data-ajax-method="GET"
+            href='@Url.Action("ChangeLanguage", "Home", new { area = "", culture = "bg" })'
+            class="btn">BG
+        </a>
+    </li>
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
     </li>
