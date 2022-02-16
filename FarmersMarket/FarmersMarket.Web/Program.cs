@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FarmersMarket.Web.Hubs;
-using System.Globalization;
-using Microsoft.AspNetCore.Localization;
 using FarmersMarket.Web.Resources;
 using System.Reflection;
 using Microsoft.Extensions.Localization;
