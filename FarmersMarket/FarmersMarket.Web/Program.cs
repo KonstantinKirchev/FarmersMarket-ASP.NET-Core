@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FarmersMarket.Web.Hubs;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using FarmersMarket.Web.Resources;
+using System.Reflection;
+using Microsoft.Extensions.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +30,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddSignalR();
 
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
 builder.Services.AddMvc(options =>
 {
     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
@@ -32,7 +39,14 @@ builder.Services.AddMvc(options =>
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddDataAnnotationsLocalization(option =>
+{
+    var type = typeof(Resource);
+    var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
+    var factory = builder.Services.BuildServiceProvider().GetService<IStringLocalizerFactory>();
+    var localizer = factory.Create("Resource", assemblyName.Name);
+    option.DataAnnotationLocalizerProvider = (t, f) => localizer;
+});
 
 builder.Services.AddTransient<IFarmsService, FarmsService>();
 builder.Services.AddTransient<ICategoriesService, CategoriesService>();
@@ -56,6 +70,13 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+var supportedCultures = new[] { "en-US", "bg" };
+var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+
+app.UseRequestLocalization(localizationOptions);
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
