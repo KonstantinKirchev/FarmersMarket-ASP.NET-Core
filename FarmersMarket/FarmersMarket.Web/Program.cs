@@ -30,6 +30,12 @@ builder.Services.AddSignalR();
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
+builder.Services.AddAuthentication().AddFacebook(fb =>
+{
+    fb.AppId = builder.Configuration["Authentication:Facebook:AppId"];
+    fb.AppSecret = builder.Configuration["Authentication:Facebook:AppSecret"];
+});
+
 builder.Services.AddMvc(options =>
 {
     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
