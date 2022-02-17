@@ -4,11 +4,12 @@
     using FarmersMarket.Models.ViewModels;
     using FarmersMarket.Services.Interfaces;
     using FarmersMarket.Web.Infrastructure;
+    using FarmersMarket.Web.Infrastructure.Filters;
     using Microsoft.AspNetCore.Mvc;
     using Stripe;
-    using Stripe.Checkout;
     using System.Collections.Generic;
 
+    [Log]
     public class ShoppingCartController : BaseController
     {
         private readonly IShoppingCartService service;

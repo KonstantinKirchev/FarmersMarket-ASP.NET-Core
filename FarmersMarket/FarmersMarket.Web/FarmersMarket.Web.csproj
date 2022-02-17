@@ -34,7 +34,6 @@
   <ItemGroup>
     <Folder Include="Areas\Manager\Controllers\" />
     <Folder Include="Areas\Manager\Views\" />
-    <Folder Include="Infrastructure\Filters\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
