@@ -220,6 +220,7 @@
                         product.Quantity -= cart.Units;
                     } else
                     {
+                        cart.Units = product.Quantity;
                         product.Quantity = 0;
                     }
                     db.SaveChanges();
