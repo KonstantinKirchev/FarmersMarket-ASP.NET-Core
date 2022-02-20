@@ -12,19 +12,19 @@
     <script type="text/javascript">
         $(document)
         .ready(function () {
-            $("#paymentMethod").on("change", () => {
-                var statusSelected = $("#paymentMethod option:selected").first().text();
-                if (statusSelected == 'Credit Card') {
-                    $("#payWithCreditCard").removeClass('d-none');
-                    $("#payWithCash").addClass('d-none');
-                } else if (statusSelected == 'Cash') {
-                    $("#payWithCreditCard").addClass('d-none');
-                    $("#payWithCash").removeClass('d-none');
-                } else {
-                    $("#payWithCreditCard").addClass('d-none');
-                    $("#payWithCash").addClass('d-none');
-                }
-            });
+            $(document).on("change","#paymentMethod", () => {
+                    var statusSelected = $("#paymentMethod option:selected").first().text();
+                    if (statusSelected == 'Credit Card') {
+                        $("#payWithCreditCard").removeClass('d-none');
+                        $("#payWithCash").addClass('d-none');
+                    } else if (statusSelected == 'Cash') {
+                        $("#payWithCreditCard").addClass('d-none');
+                        $("#payWithCash").removeClass('d-none');
+                    } else {
+                        $("#payWithCreditCard").addClass('d-none');
+                        $("#payWithCash").addClass('d-none');
+                    }
+                });
         });
     </script>
 }
