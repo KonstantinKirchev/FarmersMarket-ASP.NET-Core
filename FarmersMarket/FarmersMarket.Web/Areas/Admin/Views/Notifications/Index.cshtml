@@ -8,43 +8,21 @@
 
 <form asp-controller="Notifications" asp-action="Notification" data-ajax="true" data-ajax-method="POST" data-ajax-oncomplete="clearMessage">
     <label for="type">Type:</label>
-    <select id="type" name="type" class="form-control">
+    <select id="type" name="type" class="form-select">
         <option value="info">Info</option>
         <option value="danger">Danger</option>
         <option value="success">Success</option>
         <option value="warning">Warning</option>
     </select>
     <label for="notification">Notification:</label>
-    <input id="notification" type="text" name="notification" class="form-control"  /> 
+    <textarea rows="3"  id="notification" name="notification" class="form-control"></textarea> 
     <br/>
     <input id="submit" type="submit" value="Send" class="btn btn-primary"/>
 </form>
 
-@*@using (Ajax.BeginForm("SendNotification", "Notifications", new AjaxOptions()
-{
-    HttpMethod = "POST",
-    LoadingElementId = "messageSend",
-    LoadingElementDuration = 1000,
-    OnComplete = "clearMessage"
-}))
-{
-    <label for="type">Type:</label>
-    <select id="type" name="type" class="form-control">
-        <option value="info">Info</option>
-        <option value="danger">Danger</option>
-        <option value="success">Success</option>
-        <option value="warning">Warning</option>
-    </select>
-    <label for="notification">Notification:</label>
-    <input id="notification" type="text" name="notification" class="form-control"  /> 
-    <br/>
-    <input id="submit" type="submit" value="Send" class="btn btn-primary"/>
-}*@
-
 @section Scripts{
     <script>
         function clearMessage() {
-            console.log(1);
             $("#notification").val("");
         }
     </script>
