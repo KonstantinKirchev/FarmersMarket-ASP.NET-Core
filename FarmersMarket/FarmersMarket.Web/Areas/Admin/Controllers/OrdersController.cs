@@ -58,7 +58,7 @@
         [Route("{id}/client")]
         public IActionResult Client(int id)
         {
-            UserViewModel? user = service.GetOrderOwner(id);
+            UserViewModel user = service.GetOrderOwner(id);
 
             return View(user);
         }

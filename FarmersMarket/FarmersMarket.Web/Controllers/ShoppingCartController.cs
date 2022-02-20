@@ -42,7 +42,7 @@
         [Route("/shoppingcart/addproduct/{id}")]
         public IActionResult AddProduct(int id)
         {
-            Models.EntityModels.Product? product = service.GetProduct(id);
+            Models.EntityModels.Product product = service.GetProduct(id);
 
             ShoppingCart cart = service.GetShoppingCart(this.userService.GetCurrentUser().Result);
 
@@ -59,9 +59,9 @@
         [Route("/shoppingcart/cart/{cartId}/removeproduct/{id}")]
         public IActionResult RemoveProduct(int cartId, int id)
         {
-            Models.EntityModels.Product? product = service.GetProduct(id);
+            Models.EntityModels.Product product = service.GetProduct(id);
 
-            ShoppingCart? cart = service.GetCurrentShoppingCart(cartId);
+            ShoppingCart cart = service.GetCurrentShoppingCart(cartId);
 
             if (product != null && cart != null)
             {
@@ -78,9 +78,9 @@
         [Route("/shoppingcart/cart/{cartId}/decreaseproductunits/{id}")]
         public IActionResult DecreaseProductUnits(int cartId, int id)
         {
-            Models.EntityModels.Product? product = service.GetProduct(id);
+            Models.EntityModels.Product product = service.GetProduct(id);
 
-            ShoppingCart? cart = service.GetCurrentShoppingCart(cartId);
+            ShoppingCart cart = service.GetCurrentShoppingCart(cartId);
 
             if (product != null && cart != null)
             {
@@ -96,9 +96,9 @@
         [Route("/shoppingcart/cart/{cartId}/increaseproductunits/{id}")]
         public IActionResult IncreaseProductUnits(int cartId, int id)
         {
-            Models.EntityModels.Product? product = service.GetProduct(id);
+            Models.EntityModels.Product product = service.GetProduct(id);
 
-            ShoppingCart? cart = service.GetCurrentShoppingCart(cartId);
+            ShoppingCart cart = service.GetCurrentShoppingCart(cartId);
 
             if (product != null && cart != null)
             {

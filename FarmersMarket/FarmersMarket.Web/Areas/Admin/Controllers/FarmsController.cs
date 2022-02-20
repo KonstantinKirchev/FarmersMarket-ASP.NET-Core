@@ -49,7 +49,7 @@
         [Route("Admin/Farms/{id}/Edit")]
         public IActionResult Edit(int id)
         {
-            FarmViewModel? viewModel = service.GetEditFarm(id);
+            FarmViewModel viewModel = service.GetEditFarm(id);
 
             if (viewModel == null)
             {
@@ -83,7 +83,7 @@
                 return new BadRequestResult();
             }
 
-            FarmViewModel? viewModel = service.GetDeleteFarm(id);
+            FarmViewModel viewModel = service.GetDeleteFarm(id);
 
             if (viewModel == null)
             {

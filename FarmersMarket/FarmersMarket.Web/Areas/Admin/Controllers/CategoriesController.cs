@@ -64,7 +64,7 @@
                 return new BadRequestResult();
             }
 
-            CategoryViewModel? viewModel = service.GetEditCategory(id);
+            CategoryViewModel viewModel = service.GetEditCategory(id);
 
             if (viewModel == null)
             {
@@ -97,7 +97,7 @@
                 return new BadRequestResult();
             }
 
-            CategoryViewModel? viewModel = service.GetDeleteCategory(id);
+            CategoryViewModel viewModel = service.GetDeleteCategory(id);
 
             if (viewModel == null)
             {

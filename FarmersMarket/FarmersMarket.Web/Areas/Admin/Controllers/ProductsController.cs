@@ -51,7 +51,7 @@
         [Route("Admin/Products/{id}/Edit")]
         public IActionResult Edit(int id)
         { 
-            ProductViewModel? viewModel = service.GetEditProduct(id);
+            ProductViewModel viewModel = service.GetEditProduct(id);
 
             return View(viewModel);
         }
@@ -80,7 +80,7 @@
                 return BadRequest();
             }
 
-            ProductViewModel? viewModel = service.GetDeleteProduct(id);
+            ProductViewModel viewModel = service.GetDeleteProduct(id);
 
             if (viewModel == null)
             {
