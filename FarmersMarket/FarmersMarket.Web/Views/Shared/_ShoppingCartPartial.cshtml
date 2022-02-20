@@ -79,7 +79,7 @@ else
             <input type="hidden" name="orderId" value="@ViewBag.OrderId" id="order-Id" />
             <div class="form-group d-flex justify-content-end">
                 <div class="col-lg-3">
-                    <select class="form-select selectpicker" id="status">
+                    <select class="form-select selectpicker" id="paymentMethod">
                         <option>Select Payment Method</option>
                         <option value="cash">Cash</option>
                         <option value="creditCard">Credit Card</option>
@@ -103,14 +103,9 @@ else
                 </form>
             </div>
             <div class="form-group d-flex justify-content-end d-none" id="payWithCash">
-                <a data-ajax="true"
-                    data-ajax-loading="#ordered"
-                    data-ajax-update="#myCart"
-                    data-ajax-mode="replace"
-                    data-ajax-method="GET"
-                    href='@Url.Action("PlaceOrder", "ShoppingCart", new { area = "", id = ViewBag.ShoppingCartId, totalAmount = total })'
-                    class="btn btn-success order-button">Order now
-                </a>
+                <form asp-controller="ShoppingCart" asp-action="PlaceOrder" asp-route-id="@ViewBag.ShoppingCartId" asp-route-totalAmount="@total" method="POST">
+                    <input class="btn btn-success order-button" type="submit" value="Order now"/>
+                </form>
             </div>
         </div>
     </div>

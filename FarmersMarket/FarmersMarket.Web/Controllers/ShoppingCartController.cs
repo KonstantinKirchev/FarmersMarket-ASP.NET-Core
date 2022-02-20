@@ -110,14 +110,14 @@
             return this.PartialView("_ShoppingCartPartial", carts);
         }
 
-        [HttpGet]
-        [Route("/shoppingcart/placeorder/{id}")]
+        [HttpPost]
+        [Route("/shoppingcart/placeorder/{id}/{totalAmount}")]
         public IActionResult PlaceOrder(int id, decimal totalAmount)
         {
             if (!service.IsProfileComplete(this.userService.GetCurrentUser().Result))
             {
-                UserViewModel viewModel = userService.GetProfile();
-                return this.PartialView("_EditProfilePartial", viewModel);
+                UserViewModel user = userService.GetProfile();
+                return this.PartialView("_EditProfilePartial", user);
             }
 
             IEnumerable<ShoppingCartProductViewModel> cartProducts = service.MyShoppingCart(this.userService.GetCurrentUser().Result);
@@ -136,8 +136,8 @@
         {
             if (!service.IsProfileComplete(this.userService.GetCurrentUser().Result))
             {
-                UserViewModel viewModel = userService.GetProfile();
-                return this.PartialView("_EditProfilePartial", viewModel);
+                UserViewModel user = userService.GetProfile();
+                return this.PartialView("_EditProfilePartial", user);
             }
 
             StripeConfiguration.ApiKey = this.configuration["Stripe:SecretKey"];
