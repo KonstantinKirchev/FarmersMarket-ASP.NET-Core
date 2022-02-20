@@ -48,13 +48,4 @@ $(document)
         setTimeout(() => {
             $(".alert").alert('close');
         }, 5000);
-
-        $("#lang-en").on("click", function () {
-            $("#lang-en").hide();
-            $("#lang-bg").show();
-        });
-        $("#lang-bg").on("click", function () {
-            $("#lang-bg").hide();
-            $("#lang-en").show();
-        });
     });

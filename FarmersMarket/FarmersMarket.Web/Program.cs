@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FarmersMarket.Web.Hubs;
-using FarmersMarket.Web.Resources;
-using System.Reflection;
-using Microsoft.Extensions.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,18 +40,25 @@ builder.Services.AddAuthentication().AddFacebook(fb =>
 builder.Services.AddMvc(options =>
 {
     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+})
+.AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+.AddDataAnnotationsLocalization();
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new List<CultureInfo>
+    {
+        new CultureInfo("en"),
+        new CultureInfo("bg")
+    };
+    options.DefaultRequestCulture = new RequestCulture("en");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
 });
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddControllersWithViews().AddDataAnnotationsLocalization(option =>
-{
-    var type = typeof(Resource);
-    var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
-    var factory = builder.Services.BuildServiceProvider().GetService<IStringLocalizerFactory>();
-    var localizer = factory.Create("Resource", assemblyName.Name);
-    option.DataAnnotationLocalizerProvider = (t, f) => localizer;
-});
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IFarmsService, FarmsService>();
 builder.Services.AddTransient<ICategoriesService, CategoriesService>();
@@ -75,12 +83,7 @@ else
     app.UseHsts();
 }
 
-var supportedCultures = new[] { "en-US", "bg" };
-var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
-    .AddSupportedCultures(supportedCultures)
-    .AddSupportedUICultures(supportedCultures);
-
-app.UseRequestLocalization(localizationOptions);
+app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

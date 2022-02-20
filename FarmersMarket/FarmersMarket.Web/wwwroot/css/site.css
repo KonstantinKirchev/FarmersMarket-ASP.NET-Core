@@ -343,3 +343,13 @@ body > div.container.body-content > table > tbody > tr > td {
 #notes .icon-btn {
     color: #000 !important;
 }
+
+.form-select.culture {
+    border: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+        min-height: auto;
+    }
+}
