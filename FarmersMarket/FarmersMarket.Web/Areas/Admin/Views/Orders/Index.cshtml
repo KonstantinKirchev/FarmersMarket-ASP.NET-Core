@@ -19,12 +19,13 @@
             <h1>@ViewData["Title"]</h1>
             <br>
             <div class="form-group">
-                <label for="status" class="col-lg-1 control-label">Sort by:</label>
+                <label for="status" class="col-lg-1 control-label">Filter by:</label>
                 <div class="col-lg-2">
-                    <select class="form-select selectpicker" id="status">
+                    <select class="form-select selectpicker" id="orderStatus">
                         <option>All</option>
                         <option>Open</option>
                         <option>Pending</option>
+                        <option>Placed</option>
                         <option>Delivered</option>
                     </select>
                 </div>
@@ -44,8 +45,8 @@
 {
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#status").change(function () {
-                var statusSelected = $("select option:selected").first().text();
+            $("#orderStatus").change(function () {
+                var statusSelected = $("#orderStatus option:selected").first().text();
                 $.get('@Url.Action("OrdersByStatusPartial")',
                     { status: statusSelected }, function (data) {
                         $("#orders").html(data);
