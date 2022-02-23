@@ -27,6 +27,6 @@
         public string Email { get; set; }
 
         [Display(Name = "Image Url")]
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }
