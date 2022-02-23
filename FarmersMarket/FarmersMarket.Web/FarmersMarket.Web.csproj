@@ -28,7 +28,6 @@
     <ProjectReference Include="..\FarmersMarket.Data\FarmersMarket.Data.csproj" />
     <ProjectReference Include="..\FarmersMarket.Models\FarmersMarket.Models.csproj" />
     <ProjectReference Include="..\FarmersMarket.Services\FarmersMarket.Services.csproj" />
-    <ProjectReference Include="..\FarmersMarket.Tests\FarmersMarket.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>

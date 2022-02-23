@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
+using FarmersMarket.Data.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +61,8 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddTransient<DbContext, FarmersMarketDbContext>();
+builder.Services.AddTransient<IFarmersMarketData, FarmersMarketData>();
 builder.Services.AddTransient<IFarmsService, FarmsService>();
 builder.Services.AddTransient<ICategoriesService, CategoriesService>();
 builder.Services.AddTransient<IProductsService, ProductsService>();

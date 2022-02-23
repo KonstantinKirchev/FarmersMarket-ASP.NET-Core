@@ -1,7 +1,7 @@
 ﻿namespace FarmersMarket.Services.Implementations
 {
     using AutoMapper;
-    using FarmersMarket.Data;
+    using FarmersMarket.Data.UnitOfWork;
     using FarmersMarket.Models.BindingModels;
     using FarmersMarket.Models.EntityModels;
     using FarmersMarket.Models.ViewModels;
@@ -9,21 +9,21 @@
 
     public class FarmsService : Service, IFarmsService
     {
-        public FarmsService(FarmersMarketDbContext db, IMapper mapper) 
+        public FarmsService(IFarmersMarketData db, IMapper mapper) 
             : base(db, mapper)
         {
         }
 
         public IEnumerable<FarmViewModel> GetAllFarms()
         {
-            IEnumerable<Farm> farms = this.db.Farms.Where(f => f.IsDeleted == false).OrderBy(f => f.Id).ToList();
+            IEnumerable<Farm> farms = this.db.Farms.All().Where(f => f.IsDeleted == false).OrderBy(f => f.Id).ToList();
             IEnumerable<FarmViewModel> viewModels = this.mapper.Map<IEnumerable<Farm>, IEnumerable<FarmViewModel>>(farms);
             return viewModels;
         }
 
         public void CreateNewFarm(FarmBindingModel model)
         {
-            Farm? existingFarm = this.db.Farms.FirstOrDefault(f => f.Name == model.Name);
+            Farm? existingFarm = this.db.Farms.All().FirstOrDefault(f => f.Name == model.Name);
 
             if (existingFarm == null)
             {

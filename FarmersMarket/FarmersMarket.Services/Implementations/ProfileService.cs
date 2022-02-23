@@ -1,7 +1,7 @@
 ﻿namespace FarmersMarket.Services.Implementations
 {
     using AutoMapper;
-    using FarmersMarket.Data;
+    using FarmersMarket.Data.UnitOfWork;
     using FarmersMarket.Models.BindingModels;
     using FarmersMarket.Models.EntityModels;
     using FarmersMarket.Models.Enums;
@@ -15,7 +15,7 @@
         private readonly UserManager<User> userManager;
         private readonly IHttpContextAccessor httpContextAccessor;
 
-        public ProfileService(FarmersMarketDbContext db, IMapper mapper, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
+        public ProfileService(IFarmersMarketData db, IMapper mapper, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
             : base(db, mapper)
         {
             this.userManager = userManager;
@@ -35,6 +35,7 @@
 
             IEnumerable<ShoppingCart> shoppingcarts =
                 this.db.ShoppingCarts
+                    .All()
                     .Where(s => s.UserId == user.Id)
                     .OrderByDescending(s => s.DateOfOrder)
                     .ToList();
@@ -52,11 +53,11 @@
             if (status != "All")
             {
                 OrderStatus currentStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus), status);
-                orders = this.db.ShoppingCarts.Where(s => s.UserId == user.Id && s.Status == currentStatus).ToList();
+                orders = this.db.ShoppingCarts.All().Where(s => s.UserId == user.Id && s.Status == currentStatus).ToList();
             }
             else
             {
-                orders = this.db.ShoppingCarts.Where(s => s.UserId == user.Id).ToList();
+                orders = this.db.ShoppingCarts.All().Where(s => s.UserId == user.Id).ToList();
             }
 
             IEnumerable<MyOrderViewModel> viewModels = this.mapper.Map<IEnumerable<ShoppingCart>, IEnumerable<MyOrderViewModel>>(orders);

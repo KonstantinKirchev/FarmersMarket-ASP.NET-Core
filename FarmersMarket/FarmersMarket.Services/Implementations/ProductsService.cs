@@ -1,7 +1,7 @@
 ﻿namespace FarmersMarket.Services.Implementations
 {
     using AutoMapper;
-    using FarmersMarket.Data;
+    using FarmersMarket.Data.UnitOfWork;
     using FarmersMarket.Models.BindingModels;
     using FarmersMarket.Models.EntityModels;
     using FarmersMarket.Models.ViewModels;
@@ -10,14 +10,14 @@
 
     public class ProductsService : Service, IProductsService
     {
-        public ProductsService(FarmersMarketDbContext db, IMapper mapper) 
+        public ProductsService(IFarmersMarketData db, IMapper mapper) 
             : base(db, mapper)
         {
         }
 
         public IEnumerable<ProductViewModel> GetAllProducts()
         {
-            IEnumerable<Product> products = this.db.Products.Where(p => p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
+            IEnumerable<Product> products = this.db.Products.All().Where(p => p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
             IEnumerable<ProductViewModel> viewModels = this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
 
             return viewModels;
@@ -25,21 +25,21 @@
 
         public IEnumerable<ProductViewModel> GetFilteredProducts(string category)
         {
-            IEnumerable<Product> products = this.db.Products.Where(p => p.Category.Name == category && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
+            IEnumerable<Product> products = this.db.Products.All().Where(p => p.Category.Name == category && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
             IEnumerable<ProductViewModel> viewModels = this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
             return viewModels;
         }
 
         public IEnumerable<ProductViewModel> GetSearchedProducts(string product)
         {
-            IEnumerable<Product> products = this.db.Products.Where(p => p.Name.Contains(product) && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
+            IEnumerable<Product> products = this.db.Products.All().Where(p => p.Name.Contains(product) && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
             IEnumerable<ProductViewModel> viewModels = this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
             return viewModels;
         }
 
         public IEnumerable<ProductViewModel> GetProductsByFarm(string farm)
         {
-            IEnumerable<Product> products = this.db.Products.Where(p => p.Owner.Name == farm && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
+            IEnumerable<Product> products = this.db.Products.All().Where(p => p.Owner.Name == farm && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
             IEnumerable<ProductViewModel> viewModels = this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
             return viewModels;
         }
@@ -57,7 +57,7 @@
 
         public void CreateNewProduct(ProductBindingModel model)
         {
-            Product? existingProduct = this.db.Products.FirstOrDefault(p => p.Name == model.Name && p.CategoryId == model.CategoryId && p.OwnerId == model.FarmId);
+            Product? existingProduct = this.db.Products.All().FirstOrDefault(p => p.Name == model.Name && p.CategoryId == model.CategoryId && p.OwnerId == model.FarmId);
 
             if (existingProduct == null)
             {
@@ -171,6 +171,7 @@
         {
             var categories = this.db
                         .Categories
+                        .All()
                         .Where(c => c.IsDeleted == false)
                         .Select(x =>
                                 new SelectListItem
@@ -188,6 +189,7 @@
         {
             var categories = this.db
                         .Categories
+                        .All()
                         .Where(c => c.IsDeleted == false)
                         .Select(x =>
                                 new SelectListItem
@@ -206,6 +208,7 @@
         {
             var farms = this.db
                         .Farms
+                        .All()
                         .Where(c => c.IsDeleted == false)
                         .Select(x =>
                                 new SelectListItem
@@ -223,6 +226,7 @@
         {
             var farms = this.db
                         .Farms
+                        .All()
                         .Where(c => c.IsDeleted == false)
                         .Select(x =>
                                 new SelectListItem

@@ -1,7 +1,7 @@
 ﻿namespace FarmersMarket.Services.Implementations
 {
     using AutoMapper;
-    using FarmersMarket.Data;
+    using FarmersMarket.Data.UnitOfWork;
     using FarmersMarket.Models.EntityModels;
     using FarmersMarket.Models.Enums;
     using FarmersMarket.Models.ViewModels;
@@ -10,7 +10,7 @@
 
     public class ShoppingCartService : Service, IShoppingCartService
     {
-        public ShoppingCartService(FarmersMarketDbContext db, IMapper mapper)
+        public ShoppingCartService(IFarmersMarketData db, IMapper mapper)
             : base(db, mapper)
         {
         }
@@ -25,11 +25,13 @@
         {
             ShoppingCart? shoppingcart =
                 this.db.ShoppingCarts
+                    .All()
                     .Include(s => s.ShoppingCartProducts)
                     .FirstOrDefault(s => s.UserId == user.Id && s.Status == OrderStatus.Open);
 
             IEnumerable<ShoppingCartProduct> shoppingCartProducts =
                 this.db.ShoppingCartProducts
+                    .All()
                     .Where(s => s.ShoppingCart.UserId == user.Id && s.ShoppingCart.Status == OrderStatus.Open)
                     .Include(s => s.Product)
                     .Include(s => s.ShoppingCart)
@@ -60,6 +62,7 @@
         {
             IEnumerable<ShoppingCartProduct> shoppingcarts =
                 this.db.ShoppingCartProducts
+                    .All()
                     .Where(s => s.ShoppingCart.UserId == user.Id && s.ShoppingCart.Status == OrderStatus.Open)
                     .Include(s => s.Product)
                     .Include(s => s.ShoppingCart)
@@ -81,10 +84,12 @@
         {
             var products =
                 this.db.ShoppingCartProducts
+                .All()
                 .Where(sp => sp.ShoppingCartId == cart.Id).Select(sp => sp.Product).ToList();
 
             ShoppingCartProduct? shoppingCartProduct =
                 this.db.ShoppingCartProducts
+                .All()
                 .FirstOrDefault(sp => sp.ShoppingCartId == cart.Id && sp.ProductId == product.Id);
 
             if (products.Any())
@@ -114,6 +119,7 @@
         {
             var shoppingCartProduct =
                             this.db.ShoppingCartProducts
+                            .All()
                             .SingleOrDefault(mc => mc.ShoppingCartId == cart.Id && mc.ProductId == product.Id);
 
             if (shoppingCartProduct != null)
@@ -127,6 +133,7 @@
         {
             var shoppingCartProduct =
                             this.db.ShoppingCartProducts
+                            .All()
                             .SingleOrDefault(mc => mc.ShoppingCartId == cart.Id && mc.ProductId == product.Id);
 
             if (shoppingCartProduct != null)
@@ -145,6 +152,7 @@
         {
             var shoppingCartProduct =
                             this.db.ShoppingCartProducts
+                            .All()
                             .SingleOrDefault(mc => mc.ShoppingCartId == cart.Id && mc.ProductId == product.Id);
 
             if (shoppingCartProduct != null)
@@ -197,6 +205,7 @@
         {
             IEnumerable<ShoppingCartProduct> products =
                 this.db.ShoppingCartProducts
+                .All()
                 .Where(s => s.ShoppingCartId == id)
                 .Include(s => s.Product)
                 .Include(s => s.ShoppingCart)
