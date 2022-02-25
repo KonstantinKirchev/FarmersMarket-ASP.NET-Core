@@ -6,6 +6,7 @@
     using FarmersMarket.Models.Enums;
     using FarmersMarket.Models.ViewModels;
     using FarmersMarket.Services.Interfaces;
+    using Microsoft.EntityFrameworkCore;
 
     public class OrdersService : Service, IOrdersService
     {
@@ -59,7 +60,12 @@
             var products =
                 this.db.ShoppingCartProducts
                 .All()
-                .Where(sp => sp.ShoppingCartId == id).ToList();
+                .Where(sp => sp.ShoppingCartId == id)
+                .Include(s => s.Product)
+                .Include(s => s.ShoppingCart)
+                .Include(s => s.Product.Owner)
+                .Include(s => s.Product.Category)
+                .ToList();
 
             return products;
         }

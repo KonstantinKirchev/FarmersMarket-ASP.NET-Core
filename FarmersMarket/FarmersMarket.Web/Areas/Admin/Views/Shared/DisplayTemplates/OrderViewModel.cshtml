@@ -6,8 +6,8 @@
     <td>@Model.Id</td>
     <td>@Model.DateOfOrder</td>
     <td>@Model.DateOfDelivery</td>
-    <td>@Html.ActionLink("client", "Client", "Orders", new { id = Model.Id }, null)</td>
-    <td>@Html.ActionLink("products", "Products", "Orders", new { id = Model.Id }, null)</td>
+    <td><a asp-area="Admin" asp-controller="Orders" asp-action="Client" asp-route-id="@Model.Id">client</a></td>
+    <td><a asp-area="Admin" asp-controller="Orders" asp-action="Products" asp-route-id="@Model.Id">products</a></td>
     <td>@Model.TotalPrice lv.</td>
     <td>@Model.PaymentType</td>
     <td>@Model.Status</td>

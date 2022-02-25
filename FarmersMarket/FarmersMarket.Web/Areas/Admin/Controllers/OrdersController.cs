@@ -46,7 +46,7 @@
         }
 
         [HttpGet]
-        [Route("{id}/products/details")]
+        [Route("Admin/Orders/{id}/products")]
         public IActionResult Products(int id)
         {
             IEnumerable<ShoppingCartProduct> viewModels = service.GetOrderProducts(id);
@@ -55,7 +55,7 @@
         }
 
         [HttpGet]
-        [Route("{id}/client")]
+        [Route("Admin/Orders/{id}/client")]
         public IActionResult Client(int id)
         {
             UserViewModel user = service.GetOrderOwner(id);
