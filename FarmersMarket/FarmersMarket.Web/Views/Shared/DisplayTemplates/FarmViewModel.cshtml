@@ -1,9 +1,8 @@
 ﻿@model FarmViewModel
 
-<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding: 10px;">
+<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 card" style="padding: 10px; margin-right: 20px;">
     <div class="hovereffect">
          <img src="@Model.ImageUrl" asp-append-version="true" alt="Farm image" width="400" height="200" style="max-width:100%;"/>
-        @*@Html.Image(Model.ImageUrl, "Farm image")*@
     </div>
     <h4>@Model.Address</h4>
     <h3><a style="cursor: pointer;" data-toggle="modal" data-target="#myModal_@Model.Id">@Model.Name</a></h3>
