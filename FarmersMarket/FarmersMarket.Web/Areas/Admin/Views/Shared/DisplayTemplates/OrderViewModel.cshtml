@@ -11,7 +11,7 @@
     <td>@Model.TotalPrice lv.</td>
     <td>@Model.PaymentType</td>
     <td>@Model.Status</td>
-    @if (Model.Status == OrderStatus.Pending)
+    @if (Model.Status != OrderStatus.Delivered)
             {
         <td>@Html.ActionLink("Deliver", "DeliverOrder", "Orders", routeValues: new { area = "Admin", id = Model.Id }, htmlAttributes: new { @class = "btn btn-danger" })</td>
     }
