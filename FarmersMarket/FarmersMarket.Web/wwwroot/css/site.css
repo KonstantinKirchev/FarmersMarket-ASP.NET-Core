@@ -354,6 +354,12 @@ body > div.container.body-content > table > tbody > tr > td {
     object-fit: cover;
 }
 
+.pagination-container {
+    display: flex;
+    justify-content: right;
+    margin-top: 25px;
+}
+
 @media only screen and (max-width: 600px) {
     .container {
         min-height: auto;
