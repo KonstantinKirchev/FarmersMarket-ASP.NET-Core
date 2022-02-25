@@ -5,7 +5,7 @@
          <img src="@Model.ImageUrl" asp-append-version="true" alt="Farm image" width="400" height="200" style="max-width:100%;"/>
     </div>
     <h4>@Model.Address</h4>
-    <h3><a style="cursor: pointer;" data-toggle="modal" data-target="#myModal_@Model.Id">@Model.Name</a></h3>
+    <h3><a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#myModal_@Model.Id">@Model.Name</a></h3>
     @if (User.IsInRole("Admin"))
     {
         <p>
@@ -18,10 +18,8 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title">@Model.Name</h4>
+                    <h4 class="modal-title" id="myLargeModalLabel">@Model.Name</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div>
@@ -33,7 +31,7 @@
                 </div>
                 <div class="modal-footer">
                     @Html.ActionLink("Products", "ByFarm", "Products", routeValues: new { area = "", farmName = Model.Name }, htmlAttributes: new { @class = "btn btn-success" })
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Close</button>
                 </div>
             </div>
         </div>
