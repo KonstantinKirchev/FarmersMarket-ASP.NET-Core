@@ -25,8 +25,13 @@
 {
     @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
         new PagedListRenderOptions {
-        LiElementClasses = new string[] { "page-item" },
-        PageClasses = new string[] { "page-link" }
+            LiElementClasses = new string[] { "page-item" },
+            PageClasses = new string[] { "page-link" },
+            DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+            DisplayLinkToLastPage = PagedListDisplayMode.Never,
+            DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+            DisplayLinkToNextPage = PagedListDisplayMode.Always,
+            MaximumPageNumbersToDisplay = 3
         }
     )
 }
