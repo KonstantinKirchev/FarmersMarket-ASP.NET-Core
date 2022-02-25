@@ -348,6 +348,12 @@ body > div.container.body-content > table > tbody > tr > td {
     border: none;
 }
 
+.card-img-top {
+    width: 100%;
+    height: 20vw;
+    object-fit: cover;
+}
+
 @media only screen and (max-width: 600px) {
     .container {
         min-height: auto;
