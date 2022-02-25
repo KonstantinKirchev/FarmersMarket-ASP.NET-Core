@@ -5,20 +5,22 @@
 }
 
 <div class="container">
-    <div hidden="hidden" id="productToCart" class="alert alert-dismissible alert-success">The product was successfully added to your shopping cart</div>
-    <h1 class="page-header">@ViewData["Title"]</h1>
-    <div class="form-group">
-        <div class="row height d-flex justify-content-center align-items-center">
-            <div class="col-md-8">
-                <form asp-controller="Products" asp-action="Search" class="search" method="GET" role = "search"> 
-                    <i class="fa fa-search"></i> 
-                    <input id="product" name="product" type="text" class="form-control" placeholder="Search by product name" value="@(ViewBag.currentFilter as string)" /> 
-                    <button type="submit" value="Search" class="btn btn-primary">Search</button> 
-                </form>
+    <div class="row">
+        <div hidden="hidden" id="productToCart" class="alert alert-dismissible alert-success">The product was successfully added to your shopping cart</div>
+        <h1 class="page-header">@ViewData["Title"]</h1>
+        <div class="form-group">
+            <div class="row height d-flex justify-content-center align-items-center">
+                <div class="col-md-8">
+                    <form asp-controller="Products" asp-action="Search" class="search" method="GET" role = "search"> 
+                        <i class="fa fa-search"></i> 
+                        <input id="product" name="product" type="text" class="form-control" placeholder="Search by product name" value="@(ViewBag.currentFilter as string)" /> 
+                        <button type="submit" value="Search" class="btn btn-primary">Search</button> 
+                    </form>
+                </div>
             </div>
         </div>
+        @Html.DisplayFor(product => product)
     </div>
-    @Html.DisplayFor(product => product)
 </div>
 @if (Model.PageCount > 1)
 {
