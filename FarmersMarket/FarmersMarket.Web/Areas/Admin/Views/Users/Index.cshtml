@@ -1,0 +1,29 @@
+﻿@using FarmersMarket.Models.ViewModels
+@using X.PagedList
+@model IPagedList<UserViewModel>
+
+<section id="viewAllUsers">
+    @if (Model == null)
+    {
+        <div class="container">
+            <h1>There are no users.</h1>
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <h1>@ViewData["Title"]</h1>
+            <br>
+            <div id="users">
+                @{
+                    <partial name="_UsersPartial" for="@Model"/>
+                }
+            </div>
+        </div>
+    }
+</section>
+
+
+
+
+

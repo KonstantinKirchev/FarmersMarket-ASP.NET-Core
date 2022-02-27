@@ -28,5 +28,9 @@
 
         [Display(Name = "Image Url")]
         public string? ImageUrl { get; set; }
+
+        public int? FarmId { get; set; }
+
+        public Farm Farm { get; set; }
     }
 }

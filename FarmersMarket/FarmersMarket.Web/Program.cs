@@ -69,6 +69,7 @@ builder.Services.AddTransient<IProductsService, ProductsService>();
 builder.Services.AddTransient<IOrdersService, OrdersService>();
 builder.Services.AddTransient<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddTransient<IProfileService, ProfileService>();
+builder.Services.AddTransient<IUsersService, UsersService>();
 
 var app = builder.Build();
 

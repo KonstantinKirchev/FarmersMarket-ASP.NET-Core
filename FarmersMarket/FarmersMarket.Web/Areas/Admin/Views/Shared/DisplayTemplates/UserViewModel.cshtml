@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using FarmersMarket.Models.ViewModels
+@inject UserManager<User> UserManager
+@model UserViewModel
+
+@{
+    ViewData["Title"] = "Users";
+    User currentUser = await UserManager.FindByIdAsync(Model.Id);
+    bool isInRoleManager = await UserManager.IsInRoleAsync(currentUser, "Manager");
+}
+
+<tr>
+    <td>@Model.Name</td>
+    <td>@Model.Email</td>
+    <td>@Model.PhoneNumber</td>
+    <td>@(Model.Farm != null ? Model.Farm.Name : "")</td>
+    @if (!isInRoleManager)
+    {
+        <td>@Html.ActionLink("Manager", "AddUserToRoleManager", "Users", routeValues: new { area = "Admin", id = @Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })</td>
+    } else if (isInRoleManager)
+    {
+        <td>@Html.ActionLink("User", "RemoveUserFromRoleManager", "Users", routeValues: new { area = "Admin", id = @Model.Id }, htmlAttributes: new { @class = "btn btn-danger" })</td>
+    }
+</tr>
+
+
+
