@@ -42,5 +42,7 @@
         public bool IsDeleted { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
     }
 }

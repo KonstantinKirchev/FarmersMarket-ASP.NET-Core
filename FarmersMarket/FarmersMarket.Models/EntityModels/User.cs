@@ -18,6 +18,10 @@
 
         public SocialMedia? HowDoYouKnowAboutUs { get; set; }
 
+        public int? FarmId { get; set; }
+
+        public virtual Farm Farm { get; set; }
+
         public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
     }
 }
