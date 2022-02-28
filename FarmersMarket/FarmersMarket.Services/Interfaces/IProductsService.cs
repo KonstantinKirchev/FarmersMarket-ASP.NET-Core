@@ -6,6 +6,7 @@
     public interface IProductsService
     {
         IEnumerable<ProductViewModel> GetAllProducts();
+        IEnumerable<ProductViewModel> GetAllFarmProducts(int farmId);
         IEnumerable<ProductViewModel> GetFilteredProducts(string category);
         IEnumerable<ProductViewModel> GetSearchedProducts(string product);
         IEnumerable<ProductViewModel> GetProductsByFarm(string farm);

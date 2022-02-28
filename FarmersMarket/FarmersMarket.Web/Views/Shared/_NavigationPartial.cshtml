@@ -4,6 +4,11 @@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
         </li>
+    } else if (User.IsInRole("Manager"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Manager" asp-controller="Home" asp-action="Index">Manager</a>
+        </li>
     }
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="Farms" asp-action="All">@localizer["Farms"]</a>

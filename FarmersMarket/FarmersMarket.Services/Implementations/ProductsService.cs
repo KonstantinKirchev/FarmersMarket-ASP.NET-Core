@@ -23,6 +23,21 @@
             return viewModels;
         }
 
+        public IEnumerable<ProductViewModel> GetAllFarmProducts(int farmId)
+        {
+            IEnumerable<Product> products = this.db.Products
+                .All()
+                .Where(p => p.IsDeleted == false 
+                    && p.Category.IsDeleted == false 
+                    && p.Owner.IsDeleted == false
+                    && p.Owner.Id == farmId)
+                .OrderBy(p => p.Id)
+                .ToList();
+            IEnumerable<ProductViewModel> viewModels = this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
+
+            return viewModels;
+        }
+
         public IEnumerable<ProductViewModel> GetFilteredProducts(string category)
         {
             IEnumerable<Product> products = this.db.Products.All().Where(p => p.Category.Name == category && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();

@@ -5,17 +5,32 @@
     using FarmersMarket.Models.EntityModels;
     using FarmersMarket.Models.ViewModels;
     using FarmersMarket.Services.Interfaces;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+    using System.Security.Claims;
 
     public class UsersService : Service, IUsersService
     {
         private readonly UserManager<User> userManager;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public UsersService(IFarmersMarketData db, IMapper mapper, UserManager<User> userManager) 
+        public UsersService(IFarmersMarketData db, IMapper mapper, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor) 
             : base(db, mapper)
         {
             this.userManager = userManager;
+            this.httpContextAccessor = httpContextAccessor;
+        }
+
+        public string GetCurrentUserId()
+        {
+            var userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return userId;
+        }
+
+        public async Task<User> GetCurrentUser()
+        {
+            return await this.userManager.FindByIdAsync(GetCurrentUserId());
         }
 
         public IEnumerable<UserViewModel> GetAllUsers()
