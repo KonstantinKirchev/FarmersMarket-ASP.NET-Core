@@ -6,6 +6,7 @@
     using FarmersMarket.Models.ViewModels;
     using FarmersMarket.Services.Interfaces;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
 
     public class UsersService : Service, IUsersService
     {
@@ -19,7 +20,12 @@
 
         public IEnumerable<UserViewModel> GetAllUsers()
         {
-            IEnumerable<User> users = this.db.Users.All().Where(u => u.Email != "admin@gmail.com" && u.Email != "manager@gmail.com").OrderBy(o => o.Name).ToList();
+            IEnumerable<User> users = this.db.Users
+                .All()
+                .Where(u => u.Email != "admin@gmail.com" && u.Email != "manager@gmail.com")
+                .Include(s => s.Farm)
+                .OrderBy(o => o.Name)
+                .ToList();
             IEnumerable<UserViewModel> viewModels = this.mapper.Map<IEnumerable<User>, IEnumerable<UserViewModel>>(users);
 
             return viewModels;
@@ -35,6 +41,17 @@
         {
             User user = await this.userManager.FindByIdAsync(id);
             await this.userManager.RemoveFromRoleAsync(user, "Manager");
+        }
+
+        public void AssignManagerToFarm(string UserId, int FarmId)
+        {
+            User? user = this.db.Users.Find(UserId);
+
+            if (user != null)
+            {
+                user.FarmId = FarmId;
+                db.SaveChanges();
+            }
         }
     }
 }

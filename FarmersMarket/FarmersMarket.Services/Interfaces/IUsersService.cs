@@ -8,5 +8,7 @@
         Task AddUserToRoleManager(string id);
 
         Task RemoveUserFromRoleManager(string id);
+
+        void AssignManagerToFarm(string UserId, int FarmId);
     }
 }

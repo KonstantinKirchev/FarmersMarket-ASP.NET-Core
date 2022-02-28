@@ -1,0 +1,28 @@
+﻿@model UsersFarmsViewModel
+
+@{
+    ViewData["Title"] = "Assign manager to a farm";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+    <br/>
+    <form asp-area="Admin" asp-controller="Users" asp-action="AssignManagerToFarm" method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label  class="control-label">Select Manager</label>
+                    <select class="form-select" name="UserId" asp-for="UserId" asp-items="@Model.Users"></select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label  class="control-label">Select Farm</label>
+                    <select class="form-select" name="FarmId" asp-for="FarmId" asp-items="@Model.Farms"></select>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <input type="submit" value="Assign" class="btn btn-primary"/>
+    </form>
+</div>

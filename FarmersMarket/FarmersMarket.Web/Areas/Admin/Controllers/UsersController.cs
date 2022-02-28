@@ -3,6 +3,7 @@
     using FarmersMarket.Models.ViewModels;
     using FarmersMarket.Services.Interfaces;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using X.PagedList;
 
     public class UsersController : BaseAdminController
@@ -38,6 +39,41 @@
         public async Task<IActionResult> RemoveUserFromRoleManager(string id)
         {
             await usersService.RemoveUserFromRoleManager(id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult AssignManagerToFarm()
+        {
+            IEnumerable<UserViewModel> usersModel = usersService.GetAllUsers();
+            IEnumerable<FarmViewModel> farmsModel = farmsService.GetAllFarms();
+
+            IEnumerable<SelectListItem> users = usersModel.Select(u => new SelectListItem()
+            {
+                Text = u.Email,
+                Value = u.Id
+            });
+
+            IEnumerable<SelectListItem> farms = farmsModel.Select(f => new SelectListItem()
+            {
+                Text = f.Name,
+                Value = f.Id.ToString()
+            });
+
+            UsersFarmsViewModel viewModel = new UsersFarmsViewModel()
+            {
+                Users = users,
+                Farms = farms
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult AssignManagerToFarm(string UserId, int FarmId)
+        {
+            usersService.AssignManagerToFarm(UserId, FarmId);
+
             return RedirectToAction("Index");
         }
     }
