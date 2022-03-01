@@ -364,4 +364,8 @@ body > div.container.body-content > table > tbody > tr > td {
     .container {
         min-height: auto;
     }
+
+    .card-img-top {
+        height: auto;
+    }
 }
