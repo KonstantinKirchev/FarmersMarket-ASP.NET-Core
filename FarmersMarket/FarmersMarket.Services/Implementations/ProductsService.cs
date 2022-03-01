@@ -10,9 +10,12 @@
 
     public class ProductsService : Service, IProductsService
     {
-        public ProductsService(IFarmersMarketData db, IMapper mapper) 
+        private readonly IUsersService usersService;
+
+        public ProductsService(IFarmersMarketData db, IMapper mapper, IUsersService usersService) 
             : base(db, mapper)
         {
+            this.usersService = usersService;
         }
 
         public IEnumerable<ProductViewModel> GetAllProducts()
@@ -105,6 +108,42 @@
             this.db.SaveChanges();
         }
 
+        public async Task CreateNewFarmProduct(ProductBindingModel model)
+        {
+            Product? existingProduct = this.db.Products.All().FirstOrDefault(p => p.Name == model.Name && p.CategoryId == model.CategoryId && p.OwnerId == model.FarmId);
+            User user = await this.usersService.GetCurrentUser();
+
+            if (existingProduct == null)
+            {
+                var product = new Product()
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    Price = model.Price,
+                    Unit = model.Unit,
+                    Quantity = model.Quantity,
+                    ImageUrl = model.ImageUrl,
+                    CategoryId = model.CategoryId,
+                    OwnerId = (int)user.FarmId
+                };
+
+                this.db.Products.Add(product);
+            }
+            else
+            {
+                existingProduct.IsDeleted = false;
+                existingProduct.Description = model.Description;
+                existingProduct.Price = model.Price;
+                existingProduct.Unit = model.Unit;
+                existingProduct.Quantity = model.Quantity;
+                existingProduct.ImageUrl = model.ImageUrl;
+                existingProduct.CategoryId = model.CategoryId;
+                existingProduct.OwnerId = (int)user.FarmId;
+            }
+
+            this.db.SaveChanges();
+        }
+
         public ProductViewModel? GetEditProduct(int id)
         {
             Product? product = this.db.Products.Find(id);
@@ -118,7 +157,9 @@
             {
                 Id = product.Id,
                 Categories = GetCategoriesById(product.CategoryId),
+                CategoryId = product.CategoryId,
                 Farms = GetFarmsById(product.OwnerId),
+                FarmId = product.OwnerId,
                 Description = product.Description,
                 ImageUrl = product.ImageUrl,
                 Name = product.Name,
@@ -144,6 +185,26 @@
                 product.Quantity = model.Quantity;
                 product.CategoryId = model.CategoryId;
                 product.OwnerId = model.FarmId;
+
+                this.db.SaveChanges();
+            }
+        }
+
+        public async Task EditFarmProduct(ProductBindingModel model)
+        {
+            Product? product = db.Products.Find(model.Id);
+            User user = await this.usersService.GetCurrentUser();
+
+            if (product != null)
+            {
+                product.Name = model.Name;
+                product.Description = model.Description;
+                product.ImageUrl = model.ImageUrl;
+                product.Price = model.Price;
+                product.Unit = model.Unit;
+                product.Quantity = model.Quantity;
+                product.CategoryId = model.CategoryId;
+                product.OwnerId = (int)user.FarmId;
 
                 this.db.SaveChanges();
             }

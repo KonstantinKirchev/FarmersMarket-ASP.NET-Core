@@ -36,13 +36,13 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ProductBindingModel model)
+        public async Task<IActionResult> Create(ProductBindingModel model)
         {
             if (model != null && ModelState.IsValid)
             {
-                productsService.CreateNewProduct(model);
+                await productsService.CreateNewFarmProduct(model);
 
-                this.TempData["SuccessMessage"] = MessagesConstants.CreateNewProductSuccessMessage;
+                this.TempData["SuccessMessage"] = MessagesConstants.CreateProductSuccessMessage;
 
                 return RedirectToAction("Index", "Products", routeValues: new { area = "Manager" });
             }
@@ -55,18 +55,18 @@
         public IActionResult Edit(int id)
         {
             ProductViewModel viewModel = productsService.GetEditProduct(id);
-
+ 
             return View(viewModel);
         }
 
         [HttpPost]
         [Route("Manager/Products/{id}/Edit")]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(ProductBindingModel model)
+        public async Task<IActionResult> Edit(ProductBindingModel model)
         {
             if (model != null && ModelState.IsValid)
             {
-                productsService.EditProduct(model);
+                await productsService.EditFarmProduct(model);
 
                 return RedirectToAction("Index", "Products", routeValues: new { area = "Manager" });
             }
