@@ -6,6 +6,12 @@
         @Html.DisplayFor(modelItem => Model.Name)
     </td>
     <td>
+        @Html.DisplayFor(modelItem => Model.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.PhoneNumber)
+    </td>
+    <td>
         @Html.ActionLink("Edit", "Edit", "Farms", routeValues: new { area = "Admin", id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
         @Html.ActionLink("Delete", "Delete", "Farms", routeValues: new { area = "Admin", id = Model.Id }, htmlAttributes: new { @class = "btn btn-danger" })
     </td>

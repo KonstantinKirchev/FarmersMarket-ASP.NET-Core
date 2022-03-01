@@ -4,21 +4,25 @@
 
 <div hidden="hidden" id="messageSend" style="color: white; background-color: green; margin-top: 10px; font-size: 2em;">The message was send successfully!</div>
 
-<h2>@ViewData["Title"]</h2>
-
-<form asp-controller="Notifications" asp-action="Notification" data-ajax="true" data-ajax-method="POST" data-ajax-oncomplete="clearMessage">
-    <label for="type">Type:</label>
-    <select id="type" name="type" class="form-select">
-        <option value="info">Info</option>
-        <option value="danger">Danger</option>
-        <option value="success">Success</option>
-        <option value="warning">Warning</option>
-    </select>
-    <label for="notification">Notification:</label>
-    <textarea rows="3"  id="notification" name="notification" class="form-control"></textarea> 
-    <br/>
-    <input id="submit" type="submit" value="Send" class="btn btn-primary"/>
-</form>
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+    <div class="col-md-4">
+        <form asp-controller="Notifications" asp-action="Notification" data-ajax="true" data-ajax-method="POST" data-ajax-oncomplete="clearMessage">
+            <label for="type">Type:</label>
+            <select id="type" name="type" class="form-select">
+                <option value="info">Info</option>
+                <option value="danger">Danger</option>
+                <option value="success">Success</option>
+                <option value="warning">Warning</option>
+            </select>
+            <label for="notification">Notification:</label>
+            <textarea rows="3"  id="notification" name="notification" class="form-control"></textarea> 
+            <br/>
+            <input id="submit" type="submit" value="Send" class="btn btn-primary"/>
+        </form>
+    </div>
+</div>
 
 @section Scripts{
     <script>

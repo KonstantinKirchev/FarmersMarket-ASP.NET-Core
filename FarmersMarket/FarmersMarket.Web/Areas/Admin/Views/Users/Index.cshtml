@@ -2,26 +2,25 @@
 @using X.PagedList
 @model IPagedList<UserViewModel>
 
-<section id="viewAllUsers">
+@{
+    ViewData["Title"] = "Users";
+}
+<div class="container">
     @if (Model == null)
     {
-        <div class="container">
-            <h1>There are no users.</h1>
-        </div>
+        <h1>There are no users.</h1>
     }
     else
     {
-        <div class="container">
-            <h1>@ViewData["Title"]</h1>
-            <br>
-            <div id="users">
-                @{
-                    <partial name="_UsersPartial" for="@Model"/>
-                }
-            </div>
+        <h2>@ViewData["Title"]</h2>
+        <hr />
+        <div id="users">
+            @{
+                <partial name="_UsersPartial" for="@Model"/>
+            }
         </div>
     }
-</section>
+</div>
 
 
 

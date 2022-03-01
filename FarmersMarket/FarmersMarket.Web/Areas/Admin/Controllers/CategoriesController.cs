@@ -48,7 +48,7 @@
             {
                 this.service.CreateNewCategory(model);
 
-                this.TempData["SuccessMessage"] = MessagesConstants.CreateNewCategorySuccessMessage;
+                this.TempData["SuccessMessage"] = MessagesConstants.CreateCategorySuccessMessage;
 
                 return RedirectToAction("Index");
             }
@@ -82,6 +82,8 @@
             {
                 service.EditCategory(model);
 
+                this.TempData["SuccessMessage"] = MessagesConstants.EditCategorySuccessMessage;
+
                 return RedirectToAction("Index");
             }
 
@@ -112,6 +114,8 @@
         public IActionResult DeleteConfirmed(int id)
         {
             service.DeleteCategory(id);
+
+            this.TempData["SuccessMessage"] = MessagesConstants.DeleteCategorySuccessMessage;
 
             return RedirectToAction("Index");
         }

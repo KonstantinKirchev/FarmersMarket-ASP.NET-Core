@@ -39,7 +39,7 @@
             {
                 service.CreateNewProduct(model);
 
-                this.TempData["SuccessMessage"] = MessagesConstants.CreateNewProductSuccessMessage;
+                this.TempData["SuccessMessage"] = MessagesConstants.CreateProductSuccessMessage;
 
                 return RedirectToAction("Index", "Products", routeValues: new { area = "Admin" });
             }
@@ -64,6 +64,8 @@
             if (model != null && ModelState.IsValid)
             {
                 service.EditProduct(model);
+
+                this.TempData["SuccessMessage"] = MessagesConstants.EditProductSuccessMessage;
 
                 return RedirectToAction("Index", "Products", routeValues: new { area = "Admin" });
             }
@@ -96,6 +98,8 @@
         public IActionResult DeleteConfirmed(int id)
         {
             service.DeleteProduct(id);
+
+            this.TempData["SuccessMessage"] = MessagesConstants.DeleteProductSuccessMessage;
 
             return RedirectToAction("Index", "Products", routeValues: new { area = "Admin" });
         }

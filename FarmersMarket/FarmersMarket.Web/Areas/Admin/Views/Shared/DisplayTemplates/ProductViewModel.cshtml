@@ -6,6 +6,15 @@
         @Html.DisplayFor(modelItem => Model.Name)
     </td>
     <td>
+        @Html.DisplayFor(modelItem => Model.Price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Unit)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Quantity)
+    </td>
+    <td>
         @Html.ActionLink("Edit", "Edit", "Products", routeValues: new { area = "Admin", id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
         @Html.ActionLink("Delete", "Delete", "Products", routeValues: new { area = "Admin", id = Model.Id }, htmlAttributes: new { @class = "btn btn-danger" })
     </td>

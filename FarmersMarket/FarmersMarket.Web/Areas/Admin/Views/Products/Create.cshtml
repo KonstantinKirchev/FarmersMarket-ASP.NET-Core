@@ -6,72 +6,58 @@
 }
 
 <div class="container">
-    @using (Html.BeginForm("Create", "Products", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        <h2 class="form-signin-heading">@ViewData["Title"]</h2>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    <div class="col-md-4">
+        <form asp-area="Admin" asp-controller="Products" asp-action="Create" method="post">
+            <h2>@ViewData["Title"]</h2>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.Name" class="control-label"></label>
+                <input asp-for="@Model.Name" class="form-control" />
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label asp-for="@Model.Description" class="control-label"></label>
+                <input asp-for="@Model.Description" class="form-control" />
+                <span asp-validation-for="@Model.Description" class="text-danger"></span>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Price, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Price, "0.00", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label asp-for="@Model.Price" class="control-label"></label>
+                <input asp-for="@Model.Price" type="number" min="1" step="any" class="form-control" />
+                <span asp-validation-for="@Model.Price" class="text-danger"></span>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Unit, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Unit, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label asp-for="@Model.Unit" class="control-label"></label>
+                <input asp-for="@Model.Unit" class="form-control" />
+                <span asp-validation-for="@Model.Unit" class="text-danger"></span>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Quantity, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label asp-for="@Model.Quantity" class="control-label"></label>
+                <input asp-for="@Model.Quantity" type="number" class="form-control" />
+                <span asp-validation-for="@Model.Quantity" class="text-danger"></span>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.ImageUrl, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.ImageUrl, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label asp-for="@Model.ImageUrl" class="control-label"></label>
+                <input asp-for="@Model.ImageUrl" class="form-control" />
+                <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.CategoryId, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.CategoryId, Model.Categories, new { @class = "form-control" })
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select class="form-select" name="CategoryId" asp-for="CategoryId" asp-items="@Model.Categories"></select>
+                <span asp-validation-for="@Model.Categories" class="text-danger"></span>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.FarmId, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.FarmId, Model.Farms, new { @class = "form-control" })
+             <div class="form-group">
+                <label asp-for="FarmId" class="control-label"></label>
+                <select class="form-select" name="FarmId" asp-for="FarmId" asp-items="@Model.Farms"></select>
+                <span asp-validation-for="@Model.Farms" class="text-danger"></span>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-success"/>
-                @Html.ActionLink("Cancel", "Index", "Products", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "btn btn-danger" })
+            <div class="form-group">
+                <div class="col-md-offset-2 mt-2">
+                    <input type="submit" value="Edit" class="btn btn-success"/>
+                    <a class="btn btn-danger" asp-area="Admin" asp-controller="Products" asp-action="Index">Cancel</a>
+                </div>
             </div>
-        </div>
-    }
+        </form>
+    </div>
 </div>
 

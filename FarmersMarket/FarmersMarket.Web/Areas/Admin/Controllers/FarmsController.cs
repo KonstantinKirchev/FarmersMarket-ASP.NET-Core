@@ -37,7 +37,7 @@
             {
                 service.CreateNewFarm(model);
 
-                this.TempData["SuccessMessage"] = MessagesConstants.CreateNewFarmSuccessMessage;
+                this.TempData["SuccessMessage"] = MessagesConstants.CreateFarmSuccessMessage;
 
                 return RedirectToAction("Index", "Farms", routeValues: new { area = "Admin" });
             }
@@ -67,6 +67,8 @@
             if (model != null && ModelState.IsValid)
             {
                 service.EditFarm(model);
+
+                this.TempData["SuccessMessage"] = MessagesConstants.EditFarmSuccessMessage;
 
                 return RedirectToAction("Index", "Farms", routeValues: new { area = "Admin" });
             }
@@ -99,7 +101,9 @@
         public IActionResult DeleteConfirmed(int id)
         {
             service.DeleteFarm(id);
-           
+
+            this.TempData["SuccessMessage"] = MessagesConstants.DeleteFarmSuccessMessage;
+
             return RedirectToAction("Index", "Farms", routeValues: new { area = "Admin" });
         }
     }
