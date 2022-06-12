@@ -117,25 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Admin" xml:space="preserve">
-    <value>Admin</value>
+  <data name="About" xml:space="preserve">
+    <value>За компанията</value>
   </data>
-  <data name="All" xml:space="preserve">
-    <value>All</value>
+  <data name="Admin" xml:space="preserve">
+    <value>Администратор</value>
+  </data>
+  <data name="Company Info" xml:space="preserve">
+    <value>Един от най-големите пазари в страната</value>
   </data>
   <data name="Farms" xml:space="preserve">
-    <value>Farms</value>
+    <value>Ферми</value>
   </data>
-  <data name="Fruits" xml:space="preserve">
-    <value>Fruits</value>
+  <data name="Home" xml:space="preserve">
+    <value>Начало</value>
   </data>
-  <data name="Manager" xml:space="preserve">
-    <value>Manager</value>
+  <data name="Privacy" xml:space="preserve">
+    <value>Политика за поверителност</value>
   </data>
   <data name="Products" xml:space="preserve">
-    <value>Products</value>
-  </data>
-  <data name="Vegetables" xml:space="preserve">
-    <value>Vegetables</value>
+    <value>Продукти</value>
   </data>
 </root>

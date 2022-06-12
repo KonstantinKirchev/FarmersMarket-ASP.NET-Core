@@ -2,12 +2,12 @@
     @if (User.IsInRole("Admin"))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
+            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">@localizer["Admin"]</a>
         </li>
     } else if (User.IsInRole("Manager"))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Manager" asp-controller="Home" asp-action="Index">Manager</a>
+            <a class="nav-link text-dark" asp-area="Manager" asp-controller="Home" asp-action="Index">@localizer["Manager"]</a>
         </li>
     }
     <li class="nav-item">

@@ -2,22 +2,22 @@
         <div class="footer-left">
             <h3>Farmers<span> Market</span></h3>
             <p class="footer-links">
-                @Html.ActionLink("Home", "Index", "Home")
+                <a asp-area="" asp-controller="Home" asp-action="Index">@localizer["Home"]</a>
                 ·
-                @Html.ActionLink("Farms", "All", "Farms")
+                <a asp-area="" asp-controller="Farms" asp-action="All">@localizer["Farms"]</a>
                 ·
-                @Html.ActionLink("Products", "All", "Products")
+                <a asp-area="" asp-controller="Products" asp-action="All">@localizer["Products"]</a>
                 ·
                 @if (User.IsInRole("Admin"))
                 {
-                    @Html.ActionLink("Admin", "Index", "Home", routeValues: new { area = "Admin" }, htmlAttributes: null)
+                    <a asp-area="Admin" asp-controller="Home" asp-action="Index">@localizer["Admin"]</a>
                 }
                 else
                 {
-                    @Html.ActionLink("Shopping cart", "Index", "ShoppingCart")
+                    <a asp-area="" asp-controller="ShoppingCart" asp-action="Index">@localizer["Shopping cart"]</a>
                 }
                 ·
-                @Html.ActionLink("Privacy", "Privacy", "Home")
+                <a asp-area="" asp-controller="Home" asp-action="Privacy">@localizer["Privacy"]</a>
             </p>
             <p class="footer-company-name">Farmers Market &copy; @DateTime.UtcNow.Year</p>
         </div>
@@ -37,8 +37,8 @@
         </div>
         <div class="footer-right">
             <p class="footer-company-about">
-                <span>About the company</span>
-                One of the biggest markets in the country.
+                <span>@localizer["About"]</span>
+                @localizer["Company Info"]
             </p>
             <div class="footer-icons">
                 <a href="https://www.facebook.com/konstantin.kirchev" target="_blank"><i class="fab fa-facebook-f"></i></a>
