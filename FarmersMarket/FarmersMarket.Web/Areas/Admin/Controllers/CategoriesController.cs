@@ -29,7 +29,7 @@
         [AllowAnonymous]
         public JsonResult GetCategories()
         {
-            IEnumerable<CategoryViewModel> categories = service.GetAllCategories();
+            IEnumerable<CategoryViewModel> categories = service.GetActiveCategories();
 
             return Json(new { data = categories });
         }

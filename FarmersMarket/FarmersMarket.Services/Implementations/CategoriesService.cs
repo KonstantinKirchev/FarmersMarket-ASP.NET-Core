@@ -21,6 +21,13 @@
 
             return viewModels;
         }
+        public IEnumerable<CategoryViewModel> GetActiveCategories()
+        {
+            IEnumerable<Category> categories = this.db.Categories.All().Where(c => c.IsDeleted == false && c.Products.Any()).OrderBy(c => c.Id).ToList();
+            IEnumerable<CategoryViewModel> viewModels = this.mapper.Map<IEnumerable<Category>, IEnumerable<CategoryViewModel>>(categories);
+
+            return viewModels;
+        }
 
         public void CreateNewCategory(CategoryBindingModel model)
         {

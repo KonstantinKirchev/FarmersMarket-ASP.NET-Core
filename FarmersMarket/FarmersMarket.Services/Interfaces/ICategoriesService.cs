@@ -6,6 +6,7 @@
     public interface ICategoriesService
     {
         IEnumerable<CategoryViewModel> GetAllCategories();
+        IEnumerable<CategoryViewModel> GetActiveCategories();
         void CreateNewCategory(CategoryBindingModel model);
         CategoryViewModel? GetEditCategory(int? id);
         void EditCategory(CategoryBindingModel model);
