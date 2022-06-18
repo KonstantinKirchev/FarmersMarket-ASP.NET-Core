@@ -4,7 +4,7 @@
     <div class="hovereffect">
          <img src="@Model.ImageUrl" asp-append-version="true" alt="Farm image" width="400" height="200" style="max-width:100%;"/>
     </div>
-    <h4>@Model.Address</h4>
+    <p>@Model.Address</p>
     <h3><a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#myModal_@Model.Id">@Model.Name</a></h3>
     @if (User.IsInRole("Admin"))
     {
