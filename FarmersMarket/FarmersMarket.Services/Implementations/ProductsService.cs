@@ -7,6 +7,7 @@
     using FarmersMarket.Models.ViewModels;
     using FarmersMarket.Services.Interfaces;
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.EntityFrameworkCore;
 
     public class ProductsService : Service, IProductsService
     {
@@ -20,7 +21,12 @@
 
         public IEnumerable<ProductViewModel> GetAllProducts()
         {
-            IEnumerable<Product> products = this.db.Products.All().Where(p => p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
+            IEnumerable<Product> products = this.db.Products
+                .All()
+                .Where(p => p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false)
+                .Include(p => p.Owner)
+                .OrderBy(p => p.Id)
+                .ToList();
             IEnumerable<ProductViewModel> viewModels = this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
 
             return viewModels;
@@ -34,6 +40,7 @@
                     && p.Category.IsDeleted == false 
                     && p.Owner.IsDeleted == false
                     && p.Owner.Id == farmId)
+                .Include(p => p.Owner)
                 .OrderBy(p => p.Id)
                 .ToList();
             IEnumerable<ProductViewModel> viewModels = this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
@@ -43,21 +50,36 @@
 
         public IEnumerable<ProductViewModel> GetFilteredProducts(string category)
         {
-            IEnumerable<Product> products = this.db.Products.All().Where(p => p.Category.Name == category && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
+            IEnumerable<Product> products = this.db.Products
+                .All()
+                .Where(p => p.Category.Name == category && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false)
+                .Include(p => p.Owner)
+                .OrderBy(p => p.Id)
+                .ToList();
             IEnumerable<ProductViewModel> viewModels = this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
             return viewModels;
         }
 
         public IEnumerable<ProductViewModel> GetSearchedProducts(string product)
         {
-            IEnumerable<Product> products = this.db.Products.All().Where(p => p.Name.Contains(product) && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
+            IEnumerable<Product> products = this.db.Products
+                .All()
+                .Where(p => p.Name.Contains(product) && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false)
+                .Include(p => p.Owner)
+                .OrderBy(p => p.Id)
+                .ToList();
             IEnumerable<ProductViewModel> viewModels = this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
             return viewModels;
         }
 
         public IEnumerable<ProductViewModel> GetProductsByFarm(string farm)
         {
-            IEnumerable<Product> products = this.db.Products.All().Where(p => p.Owner.Name == farm && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false).OrderBy(p => p.Id).ToList();
+            IEnumerable<Product> products = this.db.Products
+                .All()
+                .Where(p => p.Owner.Name == farm && p.IsDeleted == false && p.Category.IsDeleted == false && p.Owner.IsDeleted == false)
+                .Include(p => p.Owner)
+                .OrderBy(p => p.Id)
+                .ToList();
             IEnumerable<ProductViewModel> viewModels = this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
             return viewModels;
         }

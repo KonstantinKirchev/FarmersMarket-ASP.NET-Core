@@ -40,5 +40,7 @@
         public int FarmId { get; set; }
 
         public IEnumerable<SelectListItem> Farms { get; set; }
+
+        public Farm Owner { get; set; }
     }
 }

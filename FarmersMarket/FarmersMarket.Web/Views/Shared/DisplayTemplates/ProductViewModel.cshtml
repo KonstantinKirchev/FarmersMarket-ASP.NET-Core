@@ -6,6 +6,7 @@
         <div class="card-body">
             <h5 class="card-title">@Model.Name</h5>
             <p class="card-text">@Model.Description</p>
+            <p class="card-text">Farm: @Model.Owner.Name</p>
             <h3 style="display: flex; justify-content: space-between;"><span>@Model.Unit</span><span style="color: red;">@Model.Price lv</span></h3>
             @if (User.Identity != null && User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
             {
