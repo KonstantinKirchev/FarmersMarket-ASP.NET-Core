@@ -117,7 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AssortedDairy" xml:space="preserve">
+    <value>Assorted dairy</value>
+  </data>
   <data name="AssortedFruits" xml:space="preserve">
     <value>Assorted fruits</value>
+  </data>
+  <data name="AssortedMeats" xml:space="preserve">
+    <value>Assorted meats</value>
+  </data>
+  <data name="AssortedVegetables" xml:space="preserve">
+    <value>Assorted vegetables</value>
+  </data>
+  <data name="OurDairiesAreFromACertifiedDairyProducers" xml:space="preserve">
+    <value>Our dairies are from a certified dairy producers</value>
+  </data>
+  <data name="TheBestFruitsInTown" xml:space="preserve">
+    <value>The best fruits in town</value>
+  </data>
+  <data name="TheBestSteaksInTownTryItForYourself" xml:space="preserve">
+    <value>The best steaks in town. Try it for yourself.</value>
+  </data>
+  <data name="TryOurDeliciousVegetables" xml:space="preserve">
+    <value>Try our delicious vegetables</value>
   </data>
 </root>

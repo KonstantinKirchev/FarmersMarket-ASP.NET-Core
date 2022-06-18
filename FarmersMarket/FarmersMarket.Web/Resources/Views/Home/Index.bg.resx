@@ -117,7 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AssortedDairy" xml:space="preserve">
+    <value>Различни млечни продукти</value>
+  </data>
   <data name="AssortedFruits" xml:space="preserve">
     <value>Различни видове плодове</value>
+  </data>
+  <data name="AssortedMeats" xml:space="preserve">
+    <value>Различни видове меса</value>
+  </data>
+  <data name="AssortedVegetables" xml:space="preserve">
+    <value>Различни видове зеленчуци</value>
+  </data>
+  <data name="OurDairiesAreFromACertifiedDairyProducers" xml:space="preserve">
+    <value>Нашите млечни продукти са от сертифицирани производители</value>
+  </data>
+  <data name="TheBestFruitsInTown" xml:space="preserve">
+    <value>Най-добрите плодове в града</value>
+  </data>
+  <data name="TheBestSteaksInTownTryItForYourself" xml:space="preserve">
+    <value>Най-добрите пържоли в града. Опитайте ги.</value>
+  </data>
+  <data name="TryOurDeliciousVegetables" xml:space="preserve">
+    <value>Опитайте нашите вкусни зеленчуци</value>
   </data>
 </root>
