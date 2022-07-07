@@ -67,15 +67,18 @@
 
         public void EditUser(UserBindingModel model)
         {
-            var user = this.GetCurrentUser().Result;
+            User user = db.Users.Find(model.Id);
 
-            user.Name = model.Name;
-            user.Email = model.Email;
-            user.ImageUrl = model.ImageUrl;
-            user.Address = model.Address;
-            user.PhoneNumber = model.PhoneNumber;
+            if (user != null)
+            {
+                user.Name = model.Name;
+                user.Email = model.Email;
+                user.ImageUrl = model.ImageUrl;
+                user.Address = model.Address;
+                user.PhoneNumber = model.PhoneNumber;
 
-            this.db.SaveChanges();
+                this.db.SaveChanges();
+            }
         }
 
         public async Task<User> GetCurrentUser() => await this.userManager.GetUserAsync(this.httpContextAccessor.HttpContext.User);
