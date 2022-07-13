@@ -13,10 +13,9 @@
                 if (Model.Quantity > 0)
                 {
                     <a data-ajax="true"
-                        data-ajax-loading="#productToCart"
                         data-ajax-method="GET"
                         href='@Url.Action("AddProduct", "ShoppingCart", new { area = "", id = Model.Id })'
-                        class="btn btn-primary">Add
+                        class="btn btn-primary add">Add
                     </a>
                 } else
                 {
