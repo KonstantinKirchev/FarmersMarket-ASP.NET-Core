@@ -128,7 +128,7 @@
                 },
                 new Product()
                 {
-                    Id = 1,
+                    Id = 2,
                     Name = "Oranges",
                     Description = "Very delicious fuits",
                     Price = 2.29m,
@@ -140,7 +140,7 @@
                 },
                 new Product()
                 {
-                    Id = 1,
+                    Id = 3,
                     Name = "Bananas",
                     Description = "Very delicious bananas",
                     Price = 1.99m,

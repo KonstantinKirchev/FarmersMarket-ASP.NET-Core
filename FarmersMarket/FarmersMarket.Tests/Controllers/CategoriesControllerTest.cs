@@ -45,8 +45,8 @@
 
             this.dbMock.Setup(c => c.Categories).Returns(this.mocks.CategoryRepositoryMock.Object);
 
-            this._service = new CategoriesService(this.dbMock.Object, this.mapper);
-            this._controller = new CategoriesController(this._service);
+            _service = new CategoriesService(this.dbMock.Object, this.mapper);
+            _controller = new CategoriesController(this._service);
         }
 
         [Fact]
