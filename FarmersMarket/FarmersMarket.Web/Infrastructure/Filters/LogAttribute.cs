@@ -7,7 +7,7 @@
     {
         public override void OnActionExecuted(ActionExecutedContext context)
         {
-            var logfile = "Infrastructure/Logs/log_" + DateTime.UtcNow.ToString("d_M_yyyy") + ".txt";
+            var logfile = "Infrastructure/Logs/" + context.Controller.GetType().Name + "_log_" + DateTime.UtcNow.ToString("d_M_yyyy") + ".txt";
             using (var writer = new StreamWriter(logfile, true)) {
                 try
                 {
