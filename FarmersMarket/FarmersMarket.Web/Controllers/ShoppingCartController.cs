@@ -120,9 +120,11 @@
                 return this.PartialView("_EditProfilePartial", user);
             }
 
+            var fixedTotalAmount = totalAmount / 100;
+
             IEnumerable<ShoppingCartProductViewModel> cartProducts = service.MyShoppingCart(this.userService.GetCurrentUser().Result);
 
-            service.MakeAnOrder(id, totalAmount);
+            service.MakeAnOrder(id, fixedTotalAmount);
 
             service.DecreaseProductQuantity(cartProducts);
 
